@@ -111,6 +111,13 @@
       color: white !important;
       border: none !important;
       box-shadow: 0 2px 3px rgba(0,0,0,0.2) !important;
+
+      /* NUOVE MODIFICHE QUI SOTTO PER LA LARGHEZZA E POSIZIONAMENTO */
+      width: 100% !important; /* Forza la larghezza al 100% del suo contenitore */
+      min-width: unset !important; /* Rimuove il min-width che potrebbe limitarlo */
+      max-width: 100% !important; /* Assicura che non vada oltre */
+      display: block !important; /* Assicura che si comporti come un blocco per occupare la larghezza */
+      margin: 0 auto !important; /* Centra il pulsante se il suo contenitore è più largo */
     }
     .billetto-widget button:hover {
       background-color: #1565c0 !important; /* Blu più scuro al hover */
@@ -124,11 +131,13 @@
       color: #3c4043; /* Testo scuro */
       border: 1px solid #06417c;
       box-shadow: none; /* Nessuna ombra iniziale per outlined */
-    }
-    .whatsapp-button:hover {
-      background-color: rgba(60,64,67,0.04); /* Leggero sfondo grigio al hover */
-      border-color: #c5c8cb; /* Bordo leggermente più scuro al hover */
-      box-shadow: 0 1px 2px rgba(0,0,0,0.1); /* Leggera ombra al hover */
+
+      /* Mantieni queste per il WhatsApp button */
+      width: 100%; /* Già al 100% */
+      min-width: unset; /* Già unset per mobile, ma assicuriamolo */
+      max-width: 100%;
+      display: block;
+      margin: 0 auto;
     }
 
     /* Stili per il popup/modale di Billetto all'interno dell'iframe */
