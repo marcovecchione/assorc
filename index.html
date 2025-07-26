@@ -2,50 +2,150 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Prenotazione Evento</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acquista Biglietti Evento e Contatti</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
+    /* Reset base per il body della pagina HTML esterna */
+    body {
+      margin: 0;
+      padding: 20px; /* Un po' di padding generale per non far attaccare i contenuti ai bordi */
+      min-height: 650px; /* Altezza minima del body per l'iframe, adatta se il popup è tagliato */
+      display: flex;
+      flex-direction: column; /* Organizza gli elementi in colonna */
+      align-items: center; /* Centra gli elementi orizzontalmente */
+      justify-content: flex-start; /* Inizia gli elementi dall'alto */
+      background-color: transparent; /* Sfondo trasparente per l'iframe in Google Sites */
+      font-family: 'Quicksand', sans-serif;
+      color: #333; /* Colore testo predefinito */
+      line-height: 1.6;
+    }
+
+    /* Stile per l'immagine di titolo */
+    .title-image {
+      max-width: 100%; /* Si adatta alla larghezza del contenitore (l'iframe) */
+      height: auto; /* Mantiene le proporzioni */
+      display: block; /* Rimuove lo spazio extra sotto l'immagine */
+      margin-bottom: 25px; /* Spazio sotto l'immagine */
+    }
+
+    /* Stile per la descrizione */
+    .description {
+      text-align: center;
+      margin-bottom: 30px; /* Spazio sotto la descrizione */
+      max-width: 700px; /* Larghezza massima per il testo */
+    }
+
+    /* Stile per il contenitore del widget Billetto per un controllo migliore sul posizionamento */
+    .billetto-widget-container {
+      margin-bottom: 30px; /* Spazio sotto il pulsante Billetto */
+      text-align: center; /* Centra il pulsante Billetto se non già centrato da flex */
+    }
+
+    /* Stili per il pulsante generato dal widget Billetto */
     .billetto-widget button {
       font-family: 'Quicksand', sans-serif !important;
       padding: 15px 30px !important;
       font-size: 1.2em !important;
-      width: 250px !important;
+      
+      /* ***** IMPOSTA QUI LA LARGHEZZA ESATTA DEL TUO PULSANTE DI RIFERIMENTO ***** */
+      width: 250px !important; /* Esempio: larghezza fissa. Sostituisci questo valore. */
+      /* ************************************************************************** */
+      
       height: auto !important;
       box-sizing: border-box !important;
       border-radius: 8px !important;
+      background-color: #06417c !important; /* Colore del pulsante */
+      color: white !important;
+      border: none !important;
+      cursor: pointer !important;
+      transition: background-color 0.3s ease;
     }
 
+    .billetto-widget button:hover {
+      background-color: #052e59 !important;
+    }
+
+    /* Stili per il popup/modale di Billetto all'interno dell'iframe */
     .billetto-modal-overlay,
     .billetto-modal-container,
+    .billetto-modal-wrapper,
+    .billetto-modal-dialog,
     .billetto-modal {
-      width: 100vw !important;
-      height: 100vh !important;
+      width: 100% !important; 
+      height: 100% !important;
       max-width: none !important;
       max-height: none !important;
       background-color: rgba(0, 0, 0, 0.7) !important;
       display: flex !important;
       justify-content: center !important;
       align-items: center !important;
-      position: fixed !important;
+      position: absolute !important; /* Posizione assoluta rispetto al body dell'iframe */
       top: 0 !important;
       left: 0 !important;
       z-index: 99999 !important;
       overflow: auto !important;
     }
 
+    /* Stili per il contenuto effettivo del popup (l'iframe di Billetto) */
     .billetto-modal-content iframe,
     .billetto-modal-dialog iframe,
     iframe[src*="billetto.it/e/"] {
       width: 90% !important;
       height: 90% !important;
       border: none !important;
+      border-radius: 5px;
+    }
+
+    /* Stili per il pulsante WhatsApp */
+    .whatsapp-button {
+      display: inline-block; /* Rende il link simile a un pulsante */
+      padding: 15px 30px;
+      font-size: 1.1em;
+      background-color: #25D366; /* Colore WhatsApp verde */
+      color: white;
+      text-decoration: none; /* Rimuove la sottolineatura del link */
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'Quicksand', sans-serif;
+      transition: background-color 0.3s ease;
+      text-align: center;
+    }
+
+    .whatsapp-button:hover {
+      background-color: #1DA851;
     }
   </style>
 </head>
 <body>
-  <script src="https://billetto.it/widget.js"></script>
-  <billetto-widget type="button" event="1481892" organization="billetto.it" lang="it" theme="light" color="#06417c" button-style="rounded"></billetto-widget>
+
+  <img src="https://via.placeholder.com/800x200?text=La+Tua+Immagine+di+Titolo" alt="Titolo Evento" class="title-image">
+  <p class="description">
+    QUESTO È IL TESTO DELLA DESCRIZIONE.
+    Qui puoi inserire tutte le informazioni rilevanti sull'evento, dettagli,
+    cosa include la prenotazione, o qualsiasi altro messaggio tu voglia comunicare ai tuoi utenti.
+    Sarà centrato e facilmente leggibile.
+  </p>
+
+  <div class="billetto-widget-container">
+    <script src="https://billetto.it/widget.js"></script>
+    <billetto-widget 
+      type="button" 
+      event="1481892" 
+      organization="billetto.it" 
+      lang="it" 
+      theme="light" 
+      color="#06417c" 
+      button-style="rounded"
+    ></billetto-widget>
+  </div>
+
+  <a href="https://wa.me/+390810099929" class="whatsapp-button" target="_blank" rel="noopener noreferrer">
+    Contattaci se hai bisogno di aiuto per prenotare
+  </a>
+
 </body>
 </html>
