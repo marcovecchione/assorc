@@ -6,7 +6,22 @@
   <title>Acquista Biglietti Evento e Contatti</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+ <script>
+    // Questo script gestisce l'effetto di parallasse per l'immagine di sfondo
+    window.addEventListener('scroll', function() {
+      const parallaxBg = document.querySelector('.parallax-bg-image');
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      // Calcola il fattore di parallasse: l'immagine si muove verso l'alto più lentamente del 30%
+      // Regola il valore 0.3 per aumentare o diminuire la velocità di scorrimento dell'immagine.
+      // Un valore più piccolo (es. 0.1) la farà muovere molto più lentamente.
+      // Un valore di 0.0 la renderebbe fissa.
+      parallaxBg.style.transform = 'translateY(' + (-scrollTop * 0.3) + 'px)';
+    });
 
+    // Esegue la funzione di scorrimento una volta all'apertura per impostare la posizione iniziale
+    window.dispatchEvent(new Event('scroll'));
+  </script>
   <style>
     /* Reset base per il body della pagina HTML esterna */
     body {
@@ -235,24 +250,7 @@
           Contattaci se hai bisogno di aiuto per prenotare
         </a>
       </div>
-
     </div> </div>
-
 </body>
- <script>
-    // Questo script gestisce l'effetto di parallasse per l'immagine di sfondo
-    window.addEventListener('scroll', function() {
-      const parallaxBg = document.querySelector('.parallax-bg-image');
-      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      
-      // Calcola il fattore di parallasse: l'immagine si muove verso l'alto più lentamente del 30%
-      // Regola il valore 0.3 per aumentare o diminuire la velocità di scorrimento dell'immagine.
-      // Un valore più piccolo (es. 0.1) la farà muovere molto più lentamente.
-      // Un valore di 0.0 la renderebbe fissa.
-      parallaxBg.style.transform = 'translateY(' + (-scrollTop * 0.3) + 'px)';
-    });
 
-    // Esegue la funzione di scorrimento una volta all'apertura per impostare la posizione iniziale
-    window.dispatchEvent(new Event('scroll'));
-  </script>
 </html>
