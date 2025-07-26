@@ -12,7 +12,7 @@
     body {
       margin: 0;
       padding: 0;
-      min-height: auto; /* Assicura che il body sia almeno alto come la viewport */
+      min-height: 100vh; /* Assicura che il body sia almeno alto come la viewport */
       overflow-x: hidden; /* Previene scroll orizzontale */
       
       font-family: 'Quicksand', sans-serif;
@@ -22,16 +22,16 @@
       display: block; /* Il body si comporta come un blocco normale */
     }
 
-    /* NUOVO DIV: Contenitore per l'immagine di sfondo con effetto di parallasse */
+    /* Contenitore per l'immagine di sfondo con effetto di parallasse */
     .parallax-bg-image {
       position: absolute; /* Posizionamento rispetto al body (non fixed, gestito da JS) */
       top: 0;
       left: 0;
       width: 100%;
-      height: 100vh; /* Inizialmente copre l'altezza della viewport */
+      height: 80vh; /* L'immagine copre l'80% dell'altezza della viewport all'apertura */
       background-image: url('https://marcovecchione.github.io/assorc/disney800350.png'); /* La tua immagine di sfondo */
-      background-size: cover; /* Copre interamente l'area disponibile */
-      background-position: center top; /* Centra l'immagine, inizia dalla cima */
+      background-size: contain; /* L'intera immagine è visibile all'interno del div, senza tagli */
+      background-position: center center; /* Centra l'immagine all'interno del div */
       background-repeat: no-repeat;
       z-index: -1; /* Posiziona questo div dietro tutti gli altri contenuti */
       will-change: transform; /* Ottimizzazione per le animazioni del transform */
@@ -43,10 +43,14 @@
       background-color: #ffffff; /* SFONDO BIANCO: ESSENZIALE PER COPRIRE L'IMMAGINE FISSA */
       box-sizing: border-box; /* Include padding nella larghezza */
 
-      /* Per far apparire il contenuto DOPO la parte superiore dell'immagine fissa */
-      margin-top: 50vh; /* Regola questo valore (es. 0-100vh) per decidere dove inizia il contenuto */
+      /* Il contenuto inizia DOPO l'area dell'immagine (80vh) */
+      margin-top: 80vh; 
       position: relative; /* Per garantire che il contenuto vada sopra l'immagine di sfondo */
       z-index: 1; /* Assicura che il contenuto sia sopra l'immagine di sfondo (-1) */
+
+      /* Assicura che il blocco bianco si estenda sempre fino in fondo allo schermo
+         anche se il contenuto è breve, nascondendo lo sfondo sottostante. */
+      min-height: calc(100vh - 80vh); 
     }
 
     /* Contenitore per centrare e limitare la larghezza del TESTO e dei PULSANTI */
@@ -192,18 +196,25 @@
 
     <div class="content-centered-container">
 
+      <img src="https://marcovecchione.github.io/files-di-associazioneorchestriamo/disney800350.png" alt="Immagine titoloe" class="header-image">
+      
       <div class="content-section">
         <p>
-          L'Associazione Orchestriamo presenta, con il patrocinio del Comune di Lauro e in collaborazione con il Demurgo, Eterea danze storiche e Pro Lauro, "Musica sotto le stelle", un concerto al buio della Lauro Symphony Orchestra, che si terrà domenica 21 agosto alle ore 21:00 al Castello Lancellotti di Lauro (AV).
+          L'Associazione Orchestriamo, con il patrocinio del Comune di Lauro, presenta:  
+<strong>Il Regno Incantato della FantasIA</strong>
+
+Un evento unico, dove la magia delle colonne sonore Disney più amate prende vita grazie alla nostra orchestra dal vivo! 🎻🎺
+
+Sul palco, protagonista ed intelligenza artificiale dialogano un viaggio emozionante tra musica, tecnologia e immaginazione. 🤖🎭
+
+Una serata pensata per grandi e piccoli, tra emozione, innovazione e tanta magia!  
+
         </p>
         <p>
-          È necessaria la prenotazione.
-        </p>
-        <p>
-          A differenza degli altri anni, questa volta è <strong style="color: #1a73e8;">possibile prenotare solamente online</strong>; contattando lo staff via WhatsApp sarà possibile, ove necessario, ricevere assistenza per la prenotazione.
+          A differenza degli altri anni, questa volta è <strong style="color: #06417c;">possibile prenotare solamente online</strong>.
         </p>
         <p class="note">
-          <strong>ATTENZIONE:</strong> I biglietti non sono riservati fino alla conclusione del pagamento.
+          <strong>ATTENZIONE:</strong> I biglietti sono riservati fino alla conclusione del pagamento per 24 ore, trascorse le quali la prenotazione verrà annullata e sarà necessario ripeterla.
         </p>
       </div>
 
@@ -227,44 +238,17 @@
       </div>
 
     </div> </div> <script>
+    // Questo script gestisce l'effetto di parallasse per l'immagine di sfondo
     window.addEventListener('scroll', function() {
       const parallaxBg = document.querySelector('.parallax-bg-image');
-      const mainContent = document.querySelector('.main-content-wrapper');
-      
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       
-      // Calcola il fattore di parallasse (es. 0.3 per un 30% della velocità di scroll)
-      // L'immagine si muove verso l'alto più lentamente
+      // Calcola il fattore di parallasse: l'immagine si muove verso l'alto più lentamente del 30%
+      // Regola il valore 0.3 per aumentare o diminuire la velocità di scorrimento dell'immagine
       parallaxBg.style.transform = 'translateY(' + (-scrollTop * 0.3) + 'px)';
-
-      // LOGICA PER NON MOSTRARE L'IMMAGINE SOTTO IL CONTENUTO ALLA FINE
-      // Calcola la posizione del fondo del contenuto principale rispetto all'inizio della pagina
-      const mainContentBottom = mainContent.offsetTop + mainContent.offsetHeight;
-      const viewportHeight = window.innerHeight;
-
-      // Se il fondo del contenuto è sopra o nel mezzo della viewport
-      if (mainContentBottom < (scrollTop + viewportHeight)) {
-          // L'altezza dell'immagine di sfondo si adatta per "finire" con il contenuto
-          // Se la parte inferiore del mainContent è entrata nella viewport
-          // Allora l'altezza dell'immagine di sfondo si riduce per non andare sotto
-          let newBgHeight = mainContentBottom - (-scrollTop * 0.3); // Calcolo approssimato per la chiusura
-          
-          // Se la nuova altezza calcolata è minore dell'altezza della viewport, usiamo quella
-          // Altrimenti, usiamo l'altezza della viewport per non farla scomparire troppo presto
-          if (newBgHeight > 0 && newBgHeight < viewportHeight) {
-              parallaxBg.style.height = newBgHeight + 'px';
-          } else if (newBgHeight <= 0) {
-              parallaxBg.style.height = '0px'; // La fa scomparire se il contenuto l'ha completamente coperta
-          } else {
-              parallaxBg.style.height = viewportHeight + 'px'; // Mantiene l'altezza completa se il contenuto non l'ha ancora coperta
-          }
-      } else {
-          // Se il contenuto è ancora completamente sotto o appena visibile, l'immagine rimane a 100vh
-          parallaxBg.style.height = viewportHeight + 'px';
-      }
     });
 
-    // Esegui la funzione all'inizio per impostare la posizione iniziale correttamente
+    // Esegue la funzione di scorrimento una volta all'apertura per impostare la posizione iniziale
     window.dispatchEvent(new Event('scroll'));
   </script>
 
