@@ -18,13 +18,14 @@
       font-family: 'Quicksand', sans-serif;
       color: #3c4043;
       line-height: 1.6;
+      background-color: #ffffff; /* AGGIUNTO: Assicura che tutto lo sfondo sia bianco */
 
       display: block; /* Il body si comporta come un blocco normale */
     }
 
-    /* Contenitore per l'immagine di sfondo con effetto di parallasse */
+    /* Contenitore per l'immagine di sfondo fissa */
     .parallax-bg-image {
-      position: absolute; /* Posizionamento rispetto al body (non fixed, gestito da JS) */
+      position: fixed; /* CAMBIATO: L'immagine rimane fissa nella viewport */
       top: 0;
       left: 0;
       width: 100%;
@@ -34,7 +35,7 @@
       background-position: center center; /* Centra l'immagine all'interno del div */
       background-repeat: no-repeat;
       z-index: -1; /* Posiziona questo div dietro tutti gli altri contenuti */
-      will-change: transform; /* Ottimizzazione per le animazioni del transform */
+      /* will-change: transform; - Rimosso, non serve senza trasformazioni dinamiche JS */
     }
 
     /* Contenitore principale per tutti i contenuti - A LARGHEZZA PIENA MA CON CONTENUTO CENTRATO */
@@ -195,7 +196,7 @@
   <div class="main-content-wrapper">
 
     <div class="content-centered-container">
-
+      
       <div class="content-section">
         <p>
           L'Associazione Orchestriamo presenta, con il patrocinio del Comune di Lauro e in collaborazione con il Demurgo, Eterea danze storiche e Pro Lauro, "Musica sotto le stelle", un concerto al buio della Lauro Symphony Orchestra, che si terrà domenica 21 agosto alle ore 21:00 al Castello Lancellotti di Lauro (AV).
@@ -204,7 +205,7 @@
           È necessaria la prenotazione.
         </p>
         <p>
-          A differenza degli altri anni, questa volta è <strong style="color: #1a73e8;">possibile prenotare solamente online</strong>; contattando lo staff via WhatsApp sarà possibile, ove necessario, ricevere assistenza per la prenotazione.
+          A differenza degli altri anni, questa volta è <strong style="color: #06417c;">possibile prenotare solamente online</strong>; contattando lo staff via WhatsApp sarà possibile, ove necessario, ricevere assistenza per la prenotazione.
         </p>
         <p class="note">
           <strong>ATTENZIONE:</strong> I biglietti non sono riservati fino alla conclusione del pagamento.
@@ -230,20 +231,5 @@
         </a>
       </div>
 
-    </div> </div> <script>
-    // Questo script gestisce l'effetto di parallasse per l'immagine di sfondo
-    window.addEventListener('scroll', function() {
-      const parallaxBg = document.querySelector('.parallax-bg-image');
-      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      
-      // Calcola il fattore di parallasse: l'immagine si muove verso l'alto più lentamente del 30%
-      // Regola il valore 0.3 per aumentare o diminuire la velocità di scorrimento dell'immagine
-      parallaxBg.style.transform = 'translateY(' + (-scrollTop * 0.3) + 'px)';
-    });
-
-    // Esegue la funzione di scorrimento una volta all'apertura per impostare la posizione iniziale
-    window.dispatchEvent(new Event('scroll'));
-  </script>
-
-</body>
+    </div> </div> </body>
 </html>
