@@ -13,7 +13,8 @@
       margin: 0;
       padding: 0;
       min-height: 100vh; /* Assicura che il body sia almeno alto come la viewport */
-
+      overflow-x: hidden; /* Previene scroll orizzontale */
+      
       font-family: 'Quicksand', sans-serif;
       color: #3c4043;
       line-height: 1.6;
@@ -21,18 +22,19 @@
       display: block; /* Il body si comporta come un blocco normale */
     }
 
-    /* NUOVO DIV: Contenitore per l'immagine di sfondo fissa a tutto schermo */
-    .fixed-fullscreen-bg {
-      position: fixed; /* Essenziale per la posizione fissa rispetto alla viewport */
+    /* NUOVO DIV: Contenitore per l'immagine di sfondo con effetto di parallasse */
+    .parallax-bg-image {
+      position: absolute; /* Posizionamento rispetto al body (non fixed, gestito da JS) */
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%;
+      height: 100vh; /* Inizialmente copre l'altezza della viewport */
       background-image: url('https://marcovecchione.github.io/assorc/disney800350.png'); /* La tua immagine di sfondo */
       background-size: cover; /* Copre interamente l'area disponibile */
-      background-position: center center; /* Centra l'immagine di sfondo */
-      background-repeat: no-repeat; /* Evita la ripetizione dell'immagine */
+      background-position: center top; /* Centra l'immagine, inizia dalla cima */
+      background-repeat: no-repeat;
       z-index: -1; /* Posiziona questo div dietro tutti gli altri contenuti */
+      will-change: transform; /* Ottimizzazione per le animazioni del transform */
     }
 
     /* Contenitore principale per tutti i contenuti - A LARGHEZZA PIENA MA CON CONTENUTO CENTRATO */
@@ -42,7 +44,9 @@
       box-sizing: border-box; /* Include padding nella larghezza */
 
       /* Per far apparire il contenuto DOPO la parte superiore dell'immagine fissa */
-      margin-top: 60vh; /* Inizia dopo il 60% dell'altezza della viewport (puoi aggiustare questo valore 0-100vh) */
+      margin-top: 50vh; /* Regola questo valore (es. 0-100vh) per decidere dove inizia il contenuto */
+      position: relative; /* Per garantire che il contenuto vada sopra l'immagine di sfondo */
+      z-index: 1; /* Assicura che il contenuto sia sopra l'immagine di sfondo (-1) */
     }
 
     /* Contenitore per centrare e limitare la larghezza del TESTO e dei PULSANTI */
@@ -118,108 +122,4 @@
       cursor: pointer;
       text-decoration: none;
       text-align: center;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    /* Stile per il wrapper del pulsante primario (per Billetto) */
-    .billetto-button-wrapper {
-      background-color: #06417c;
-      color: white;
-      border: none;
-      box-shadow: 0 2px 3px rgba(0,0,0,0.2);
-    }
-    .billetto-button-wrapper:hover {
-      background-color: #053b70; /* COLORE HOVER SPECIFICO */
-      box-shadow: 0 3px 6px rgba(0,0,0,0.3);
-    }
-
-    /* Stile per il widget Billetto *all'interno* del wrapper */
-    .billetto-button-wrapper billetto-widget {
-        width: 100% !important;
-        height: 100% !important;
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-    }
-    .billetto-button-wrapper billetto-widget button {
-      background-color: transparent !important;
-      color: transparent !important;
-      border: none !important;
-      box-shadow: none !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      width: 100% !important;
-      height: 100% !important;
-      font-size: 1em !important;
-    }
-
-    /* Stile per il pulsante secondario (WhatsApp) */
-    .whatsapp-button {
-      background-color: transparent;
-      color: #3c4043;
-      border: 1px solid #06417c;
-      box-shadow: none;
-    }
-    .whatsapp-button:hover {
-      background-color: rgba(60,64,67,0.04);
-      border-color: #c5c8cb;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    }
-
-    /* Media Queries per schermi più piccoli */
-    @media (max-width: 600px) {
-        .content-centered-container {
-            padding: 20px 15px; /* Meno padding sui lati per mobile */
-        }
-        .google-style-button {
-            min-width: unset; /* Rimuovi min-width su mobile, si adatteranno meglio */
-        }
-    }
-  </style>
-</head>
-<body>
-
-  <div class="fixed-fullscreen-bg"></div>
-
-  <div class="main-content-wrapper">
-
-    <div class="content-centered-container">
-            <div class="content-section">
-        <p>
-          L'Associazione Orchestriamo presenta, con il patrocinio del Comune di Lauro e in collaborazione con il Demurgo, Eterea danze storiche e Pro Lauro, "Musica sotto le stelle", un concerto al buio della Lauro Symphony Orchestra, che si terrà domenica 21 agosto alle ore 21:00 al Castello Lancellotti di Lauro (AV).
-        </p>
-        <p>
-          È necessaria la prenotazione.
-        </p>
-        <p>
-          A differenza degli altri anni, questa volta è <strong style="color: #1a73e8;">possibile prenotare solamente online</strong>; contattando lo staff via WhatsApp sarà possibile, ove necessario, ricevere assistenza per la prenotazione.
-        </p>
-        <p class="note">
-          <strong>ATTENZIONE:</strong> I biglietti non sono riservati fino alla conclusione del pagamento.
-        </p>
-      </div>
-
-      <div class="button-container">
-        <div class="billetto-button-wrapper google-style-button">
-          <script src="https://billetto.it/widget.js"></script>
-          <billetto-widget 
-            type="button" 
-            event="1481892" 
-            organization="billetto.it" 
-            lang="it" 
-            theme="light" 
-            color="#06417c" 
-            button-style="rounded"
-          ></billetto-widget>
-        </div>
-
-        <a href="https://wa.me/+390810099929" class="whatsapp-button google-style-button" target="_blank" rel="noopener noreferrer">
-          Contattaci se hai bisogno di aiuto per prenotare
-        </a>
-      </div>
-
-    </div> </div> </body>
-</html>
+      transition: background-color 0.3s ease, box-shadow 0
