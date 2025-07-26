@@ -23,9 +23,9 @@
       display: block; /* Il body si comporta come un blocco normale */
     }
 
-    /* Contenitore per l'immagine di sfondo fissa */
+    /* Contenitore per l'immagine di sfondo con effetto di parallasse */
     .parallax-bg-image {
-      position: fixed; /* CAMBIATO: L'immagine rimane fissa nella viewport */
+      position: absolute; /* L'immagine è nel flusso del documento ma posizionata */
       top: 0;
       left: 0;
       width: 100%;
@@ -35,13 +35,13 @@
       background-position: center center; /* Centra l'immagine all'interno del div */
       background-repeat: no-repeat;
       z-index: -1; /* Posiziona questo div dietro tutti gli altri contenuti */
-      /* will-change: transform; - Rimosso, non serve senza trasformazioni dinamiche JS */
+      will-change: transform; /* Ottimizzazione per le animazioni del transform */
     }
 
     /* Contenitore principale per tutti i contenuti - A LARGHEZZA PIENA MA CON CONTENUTO CENTRATO */
     .main-content-wrapper {
       width: 100%; /* Occupa tutta la larghezza disponibile (della viewport) */
-      background-color: #ffffff; /* SFONDO BIANCO: ESSENZIALE PER COPRIRE L'IMMAGINE FISSA */
+      background-color: #ffffff; /* SFONDO BIANCO: ESSENZIALE PER COPRIRE L'IMMAGINE */
       box-sizing: border-box; /* Include padding nella larghezza */
 
       /* Il contenuto inizia DOPO l'area dell'immagine (80vh) */
@@ -231,5 +231,22 @@
         </a>
       </div>
 
-    </div> </div> </body>
+    </div> </div> <script>
+    // Questo script gestisce l'effetto di parallasse per l'immagine di sfondo
+    window.addEventListener('scroll', function() {
+      const parallaxBg = document.querySelector('.parallax-bg-image');
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      // Calcola il fattore di parallasse: l'immagine si muove verso l'alto più lentamente del 30%
+      // Regola il valore 0.3 per aumentare o diminuire la velocità di scorrimento dell'immagine.
+      // Un valore più piccolo (es. 0.1) la farà muovere molto più lentamente.
+      // Un valore di 0.0 la renderebbe fissa.
+      parallaxBg.style.transform = 'translateY(' + (-scrollTop * 0.3) + 'px)';
+    });
+
+    // Esegue la funzione di scorrimento una volta all'apertura per impostare la posizione iniziale
+    window.dispatchEvent(new Event('scroll'));
+  </script>
+
+</body>
 </html>
