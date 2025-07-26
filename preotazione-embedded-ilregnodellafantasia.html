@@ -24,13 +24,13 @@
 
     /* Contenitore per l'immagine di sfondo con effetto di parallasse */
     .parallax-bg-image {
-      position: absolute; /* Posizionamento rispetto al body (non fixed, gestito da JS) */
+      position: fixed; /* CAMBIATO: L'immagine rimane fissa nella viewport */
       top: 0;
       left: 0;
       width: 100%;
-      height: 80vh; /* L'immagine copre l'80% dell'altezza della viewport all'apertura */
+      height: 100vh; /* CAMBIATO: L'immagine copre l'intera altezza della viewport per l'effetto "mostra il centro" */
       background-image: url('https://marcovecchione.github.io/files-di-associazioneorchestriamo/disney800350.png'); /* La tua immagine di sfondo */
-      background-size: contain; /* L'intera immagine è visibile all'interno del div, senza tagli */
+      background-size: cover; /* CAMBIATO: L'immagine copre l'intero div, ritagliando se necessario. Essenziale per l'effetto "mostra il centro" */
       background-position: center center; /* Centra l'immagine all'interno del div */
       background-repeat: no-repeat;
       z-index: -1; /* Posiziona questo div dietro tutti gli altri contenuti */
@@ -43,13 +43,13 @@
       background-color: #ffffff; /* SFONDO BIANCO: ESSENZIALE PER COPRIRE L'IMMAGINE FISSA */
       box-sizing: border-box; /* Include padding nella larghezza */
 
-      /* Il contenuto inizia DOPO l'area dell'immagine (80vh) */
+      /* Il contenuto inizia DOPO l'area iniziale dell'immagine (80vh), simulando l'effetto "ridotta del 20% all'apertura" */
       margin-top: 80vh; 
       position: relative; /* Per garantire che il contenuto vada sopra l'immagine di sfondo */
       z-index: 1; /* Assicura che il contenuto sia sopra l'immagine di sfondo (-1) */
 
       /* Assicura che il blocco bianco si estenda sempre fino in fondo allo schermo
-         anche se il contenuto è breve, nascondendo lo sfondo sottostante. */
+         anche se il contenuto è breve, nascondendo lo sfondo sottostante e limitando il bianco extra. */
       min-height: calc(100vh - 80vh); 
     }
 
@@ -195,7 +195,7 @@
   <div class="main-content-wrapper">
 
     <div class="content-centered-container">
-
+      
       <div class="content-section">
         <p>
           L'Associazione Orchestriamo, con il patrocinio del Comune di Lauro, presenta: <br>
@@ -241,9 +241,9 @@
       const parallaxBg = document.querySelector('.parallax-bg-image');
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       
-      // Calcola il fattore di parallasse: l'immagine si muove verso l'alto più lentamente del 50%
-      // Ho aumentato il valore a 0.5 per un effetto più evidente. Puoi regolarlo se necessario.
-      parallaxBg.style.transform = 'translateY(' + (-scrollTop * 0.5) + 'px)';
+      // Calcola il fattore di parallasse: l'immagine si muove verso l'alto molto più lentamente (0.15)
+      // Puoi regolare questo valore (es. 0.1, 0.2) per controllare la velocità dell'effetto.
+      parallaxBg.style.transform = 'translateY(' + (-scrollTop * 0.15) + 'px)';
     });
 
     // Esegue la funzione di scorrimento una volta all'apertura per impostare la posizione iniziale
