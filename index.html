@@ -5,28 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Acquista Biglietti Evento e Contatti</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
 
 
   <style>
     /* Reset base per il body della pagina HTML esterna */
     body {
       margin: 0;
-      padding: 0; /* Rimuovi padding dal body, lo mettiamo sul wrapper interno */
-      min-height: 700px; /* Aumentato un po' l'altezza minima per il popup di Billetto */
+      padding: 0;
+      min-height: 700px; /* Altezza minima per l'iframe in Google Sites */
       display: flex;
-      justify-content: center; /* Centra il wrapper principale */
+      justify-content: center; /* Centra il wrapper principale orizzontalmente */
       align-items: flex-start; /* Allinea il contenuto in alto nel body */
-      background-color: #f8f9fa; /* Sfondo leggermente grigio chiaro come la pagina di esempio */
-      font-family: 'Roboto', sans-serif; /* Cambiato a Roboto per avvicinarsi alla pagina di esempio */
-      color: #3c4043; /* Colore testo leggermente più scuro per la leggibilità */
+      background-color: transparent; /* Sfondo trasparente per l'iframe, per usare lo sfondo di Google Sites */
+      font-family: 'Roboto', sans-serif; /* Font principale, simile a quello di Google Sites */
+      color: #3c4043; /* Colore testo scuro, come standard Google */
       line-height: 1.6;
     }
 
     /* Contenitore principale per tutti i contenuti, per centrarli e limitarne la larghezza */
     .main-content-wrapper {
-      max-width: 900px; /* Larghezza massima del contenuto, come nella pagina di esempio */
+      max-width: 900px; /* Larghezza massima del contenuto, per replicare i margini laterali */
       width: 100%; /* Occupa tutta la larghezza disponibile fino al max-width */
       padding: 30px 25px; /* Padding interno ai lati, come margini della pagina di esempio */
       box-sizing: border-box; /* Include padding nella larghezza */
@@ -52,7 +52,7 @@
       font-size: 1.05em; /* Dimensione del font leggermente maggiore */
     }
 
-    /* Stile per il contenitore del widget Billetto e pulsante WhatsApp */
+    /* Contenitore per i pulsanti per una migliore gestione dello spazio tra loro */
     .button-container {
       display: flex;
       flex-direction: column;
@@ -61,26 +61,26 @@
       margin-bottom: 20px;
     }
 
-    /* Stili per il pulsante generato dal widget Billetto */
+    /* Stili per il pulsante generato dal widget Billetto (Pulsante Primario Blu) */
     .billetto-widget button {
-      font-family: 'Roboto', sans-serif !important; /* Font del pulsante */
-      font-weight: 500 !important; /* Leggermente più spesso */
-      padding: 12px 28px !important; /* Padding leggermente ridotto per avvicinarsi allo stile Google */
+      font-family: 'Roboto', sans-serif !important;
+      font-weight: 500 !important;
+      padding: 12px 28px !important;
       font-size: 1.05em !important;   
       
-      width: fit-content !important; /* Larghezza si adatta al testo */
-      min-width: 250px !important; /* Larghezza minima per il pulsante */
-      max-width: 100% !important; /* Limita la larghezza massima per schermi molto stretti */
+      width: fit-content !important;
+      min-width: 250px !important;
+      max-width: 100% !important;
       
       height: auto !important;
       box-sizing: border-box !important;
-      border-radius: 4px !important; /* Angoli meno arrotondati per avvicinarsi allo stile Google */
-      background-color: #1a73e8 !important; /* Colore blu di Google */
+      border-radius: 4px !important;
+      background-color: #1a73e8 !important; /* Blu standard di Google per pulsanti primari */
       color: white !important;
       border: none !important;
       cursor: pointer !important;
       transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 2px 3px rgba(0,0,0,0.2); /* Ombra per il pulsante */
+      box-shadow: 0 2px 3px rgba(0,0,0,0.2); /* Ombra leggera */
     }
 
     .billetto-widget button:hover {
@@ -119,30 +119,30 @@
       border-radius: 5px;
     }
 
-    /* Stili per il pulsante WhatsApp */
+    /* Stili per il pulsante WhatsApp (Pulsante Secondario Outlined) */
     .whatsapp-button {
       display: inline-block;
       padding: 12px 28px;
       font-size: 1.05em;
-      background-color: #1a73e8; /* Colore blu di Google */
-      color: white;
-      text-decoration: none;
-      border: none;
-      border-radius: 4px; /* Angoli meno arrotondati */
+      background-color: transparent; /* Sfondo trasparente */
+      color: #3c4043; /* Testo scuro */
+      border: 1px solid #dadce0; /* Bordo grigio chiaro, come nella foto */
+      border-radius: 4px;
       cursor: pointer;
-      font-family: 'Roboto', sans-serif; /* Font del pulsante */
+      font-family: 'Roboto', sans-serif;
       font-weight: 500;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
       text-align: center;
-      width: fit-content; /* Si adatta al contenuto */
-      min-width: 250px; /* Larghezza minima */
-      max-width: 100%; /* Limita la larghezza massima */
-      box-shadow: 0 2px 3px rgba(0,0,0,0.2); /* Ombra per il pulsante */
+      width: fit-content;
+      min-width: 250px;
+      max-width: 100%;
     }
 
     .whatsapp-button:hover {
-      background-color: #1565c0; /* Blu più scuro al hover */
-      box-shadow: 0 3px 6px rgba(0,0,0,0.3); /* Ombra più pronunciata al hover */
+      background-color: rgba(60,64,67,0.04); /* Leggero sfondo grigio/blu al hover */
+      border-color: #c5c8cb; /* Bordo leggermente più scuro al hover */
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1); /* Leggera ombra al hover */
     }
   </style>
 </head>
