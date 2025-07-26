@@ -84,62 +84,61 @@
       align-items: center; /* Centra i pulsanti */
       gap: 20px; /* Spazio tra i pulsanti */
       margin-top: 40px; /* Spazio sopra i pulsanti */
+      
+      /* MODIFICATO: NUOVE REGOLE PER CONTROLLARE LA LARGHEZZA DEI PULSANTI TRAMITE IL CONTENITORE */
+      width: 100%; /* Il contenitore occupa tutta la larghezza disponibile del main-content-wrapper */
+      max-width: 350px; /* IMPOSTA QUI LA LARGHEZZA MASSIMA DESIDERATA PER I PULSANTI. Ad esempio 350px. */
+      /* Questo max-width farà in modo che i pulsanti (che saranno al 100%) non superino questa larghezza. */
     }
 
     /* Stili base per tutti i pulsanti */
     .google-style-button {
-      font-family: 'Quicksand', sans-serif; /* FONT: impostato su Quicksand */
-      font-weight: 700; /* Quicksand Bold */
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
       padding: 12px 28px;
       font-size: 1.05em;   
-      width: fit-content;
-      min-width: 250px;
-      max-width: 100%;
+      
+      /* MODIFICATO: Farà in modo che il pulsante riempia il contenitore */
+      width: 100%; /* Il pulsante occuperà il 100% del suo genitore (.button-container) */
+      min-width: unset; /* Rimuove qualsiasi min-width che potrebbe impedire al 100% di funzionare */
+      max-width: 100%; /* Assicura che non vada oltre il contenitore */
+      
       height: auto;
       box-sizing: border-box;
-      border-radius: 4px; /* Angoli standard di Google */
+      border-radius: 4px;
       cursor: pointer;
-      text-decoration: none; /* Per link (pulsanti WhatsApp) */
+      text-decoration: none;
       text-align: center;
       transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+      display: block; /* Necessario per far sì che il 100% della larghezza venga applicato correttamente */
     }
 
     /* Stile per il pulsante primario (widget Billetto) */
-    .billetto-widget button { /* Sovrascrive per targettare specificamente il pulsante del widget */
-      /* Eredita da .google-style-button e applica le specificità */
-      background-color: #06417c !important; /* Blu standard di Google */
+    .billetto-widget button {
+      background-color: #06417c !important;
       color: white !important;
       border: none !important;
-      box-shadow: 0 2px 3px rgba(0,0,0,0.2) !important;
+      box-shadow: 0 2px 3px rgba(0,0,0,0.2) !important; /* L'ombra è gestita qui */
 
-      /* NUOVE MODIFICHE QUI SOTTO PER LA LARGHEZZA E POSIZIONAMENTO */
-      width: 100% !important; /* Forza la larghezza al 100% del suo contenitore */
-      min-width: unset !important; /* Rimuove il min-width che potrebbe limitarlo */
-      max-width: 100% !important; /* Assicura che non vada oltre */
-      display: block !important; /* Assicura che si comporti come un blocco per occupare la larghezza */
-      margin: 0 auto !important; /* Centra il pulsante se il suo contenitore è più largo */
-    }
-    .billetto-widget button:hover {
-      background-color: #1565c0 !important; /* Blu più scuro al hover */
-      box-shadow: 0 3px 6px rgba(0,0,0,0.3) !important;
+      /* FORZATURA ULTERIORE PER IL WIDGET, ASSICURATI CHE SIANO PRESENTI E CON !important */
+      width: 100% !important; /* Questo è cruciale per forzare il widget a riempire il contenitore */
+      min-width: unset !important; /* Rimuove qualsiasi min-width impostato dal widget */
+      max-width: 100% !important; /* Assicura che non sforo la larghezza del contenitore */
+      display: block !important; /* Fondamentale per il comportamento di larghezza */
+      margin: 0 auto !important; /* Centratura del pulsante */
+      
+      /* Aggiunta di un padding extra per il caso in cui il widget lo rimuova */
+      padding: 12px 28px !important; /* Riconferma il padding desiderato */
     }
 
-    /* Stile per il pulsante secondario (WhatsApp) */
+    /* Stile per il pulsante secondario (WhatsApp) - non necessita grandi modifiche oltre all'ereditarietà */
     .whatsapp-button {
       /* Eredita da .google-style-button e applica le specificità */
-      background-color: transparent; /* Sfondo trasparente */
-      color: #3c4043; /* Testo scuro */
+      background-color: transparent;
+      color: #3c4043;
       border: 1px solid #06417c;
       box-shadow: none; /* Nessuna ombra iniziale per outlined */
-
-      /* Mantieni queste per il WhatsApp button */
-      width: 100%; /* Già al 100% */
-      min-width: unset; /* Già unset per mobile, ma assicuriamolo */
-      max-width: 100%;
-      display: block;
-      margin: 0 auto;
     }
-
     /* Stili per il popup/modale di Billetto all'interno dell'iframe */
     .billetto-modal-overlay,
     .billetto-modal-container,
