@@ -12,14 +12,6 @@
     body {
       margin: 0;
       padding: 0;
-      
-      /* NUOVE PROPRIETÀ PER L'IMMAGINE DI SFONDO FISSA E A TUTTO SCHERMO */
-      background-image: url('https://marcovecchione.github.io/assorc/disney800350.png'); /* La tua immagine di sfondo */
-      background-size: cover; /* Copre interamente l'area disponibile */
-      background-attachment: fixed; /* L'immagine rimane fissa mentre il contenuto scorre */
-      background-position: center center; /* Centra l'immagine di sfondo */
-      background-repeat: no-repeat; /* Evita la ripetizione dell'immagine */
-      
       min-height: 100vh; /* Assicura che il body sia almeno alto come la viewport */
 
       font-family: 'Quicksand', sans-serif;
@@ -29,7 +21,21 @@
       display: block; /* Il body si comporta come un blocco normale */
     }
 
-    /* Contenitore principale per tutti i contenuti - ORA A LARGHEZZA PIENA MA CON CONTENUTO CENTRATO */
+    /* NUOVO DIV: Contenitore per l'immagine di sfondo fissa a tutto schermo */
+    .fixed-fullscreen-bg {
+      position: fixed; /* Essenziale per la posizione fissa rispetto alla viewport */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://marcovecchione.github.io/assorc/disney800350.png'); /* La tua immagine di sfondo */
+      background-size: cover; /* Copre interamente l'area disponibile */
+      background-position: center center; /* Centra l'immagine di sfondo */
+      background-repeat: no-repeat; /* Evita la ripetizione dell'immagine */
+      z-index: -1; /* Posiziona questo div dietro tutti gli altri contenuti */
+    }
+
+    /* Contenitore principale per tutti i contenuti - A LARGHEZZA PIENA MA CON CONTENUTO CENTRATO */
     .main-content-wrapper {
       width: 100%; /* Occupa tutta la larghezza disponibile (della viewport) */
       background-color: #ffffff; /* SFONDO BIANCO: ESSENZIALE PER COPRIRE L'IMMAGINE FISSA */
@@ -39,7 +45,7 @@
       margin-top: 60vh; /* Inizia dopo il 60% dell'altezza della viewport (puoi aggiustare questo valore 0-100vh) */
     }
 
-    /* NUOVO CONTENITORE: Per centrare e limitare la larghezza del TESTO e dei PULSANTI all'interno del main-content-wrapper */
+    /* Contenitore per centrare e limitare la larghezza del TESTO e dei PULSANTI */
     .content-centered-container {
         max-width: 960px; /* Larghezza massima del contenuto interno */
         margin: 0 auto; /* Centra il contenuto interno */
@@ -165,7 +171,6 @@
 
     /* Media Queries per schermi più piccoli */
     @media (max-width: 600px) {
-        /* Rimosso padding dal main-content-wrapper e spostato nel content-centered-container */
         .content-centered-container {
             padding: 20px 15px; /* Meno padding sui lati per mobile */
         }
@@ -176,6 +181,8 @@
   </style>
 </head>
 <body>
+
+  <div class="fixed-fullscreen-bg"></div>
 
   <div class="main-content-wrapper">
 
