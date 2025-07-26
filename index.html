@@ -11,7 +11,7 @@
     /* Reset base per il body della pagina HTML esterna */
     body {
       margin: 0;
-      padding: 0; /* Inizialmente 0, il padding-top verrà aggiunto per lo scroll */
+      padding: 0;
       
       /* NUOVE PROPRIETÀ PER L'IMMAGINE DI SFONDO FISSA E A TUTTO SCHERMO */
       background-image: url('https://marcovecchione.github.io/assorc/disney800350.png'); /* La tua immagine di sfondo */
@@ -20,44 +20,47 @@
       background-position: center center; /* Centra l'immagine di sfondo */
       background-repeat: no-repeat; /* Evita la ripetizione dell'immagine */
       
-      /* Permette al main-content-wrapper di iniziare dopo un'intera schermata della foto */
-      padding-top: 100vh; /* Spinge il contenuto principale giù di un'altezza di viewport */
-      min-height: 100vh; /* Assicura che il body sia almeno alto come la viewport per la visibilità iniziale */
-
-      display: flex; /* Mantiene il flex per centrare il main-content-wrapper */
-      justify-content: center; /* Centra orizzontalmente il main-content-wrapper */
-      align-items: flex-start; /* Allinea il main-content-wrapper in alto (dopo il padding) */
+      min-height: 100vh; /* Assicura che il body sia almeno alto come la viewport */
 
       font-family: 'Quicksand', sans-serif;
       color: #3c4043;
       line-height: 1.6;
+
+      display: block; /* Il body si comporta come un blocco normale */
     }
 
-    /* Contenitore principale per tutti i contenuti, per centrarli e limitarne la larghezza */
+    /* Contenitore principale per tutti i contenuti - ORA A LARGHEZZA PIENA MA CON CONTENUTO CENTRATO */
     .main-content-wrapper {
-      max-width: 960px; /* Larghezza massima del contenuto per desktop */
-      width: 100%; /* Occupa tutta la larghezza disponibile fino al max-width */
-      padding: 40px 30px; /* Padding interno ai lati */
+      width: 100%; /* Occupa tutta la larghezza disponibile (della viewport) */
+      background-color: #ffffff; /* SFONDO BIANCO: ESSENZIALE PER COPRIRE L'IMMAGINE FISSA */
       box-sizing: border-box; /* Include padding nella larghezza */
-      background-color: #ffffff; /* SFONDO BIANCO: ESSENZIALE PER COPRIRE L'IMMAGINE FISSA QUANDO SI SCORRE */
-      /* Rimosse ombre e bordi arrotondati per replicare un'integrazione più "fluida" con Google Sites */
+
+      /* Per far apparire il contenuto DOPO la parte superiore dell'immagine fissa */
+      margin-top: 60vh; /* Inizia dopo il 60% dell'altezza della viewport (puoi aggiustare questo valore 0-100vh) */
     }
 
-    /* Stile per l'immagine di titolo/banner */
+    /* NUOVO CONTENITORE: Per centrare e limitare la larghezza del TESTO e dei PULSANTI all'interno del main-content-wrapper */
+    .content-centered-container {
+        max-width: 960px; /* Larghezza massima del contenuto interno */
+        margin: 0 auto; /* Centra il contenuto interno */
+        padding: 40px 30px; /* Padding interno ai lati del contenuto testuale/pulsanti */
+    }
+
+    /* Stile per l'immagine di titolo/banner (quella PIÙ PICCOLA nel contenuto) */
     .header-image {
-      width: 100%; /* ORA: Si adatta al 100% della larghezza del main-content-wrapper */
-      height: auto; /* Mantiene le proporzioni */
-      display: block; /* Rimuove lo spazio extra sotto l'immagine */
-      margin: 0 auto 30px auto; /* Centra l'immagine e aggiunge spazio sotto */
+      width: 100%; /* Si adatta al 100% della larghezza del content-centered-container */
+      height: auto;
+      display: block;
+      margin: 0 auto 30px auto;
     }
 
     /* Stile per la sezione della descrizione e dei dettagli */
     .content-section {
-      padding: 0; /* Nessun padding extra qui, già nel wrapper */
+      padding: 0; /* Nessun padding extra qui */
       margin-bottom: 30px;
     }
 
-    /* Stile per i titoli all'interno della sezione (es. "ATTENZIONE") */
+    /* Stile per i titoli all'interno della sezione */
     .content-section h2 {
         font-family: 'Quicksand', sans-serif;
         font-size: 1.5em;
@@ -92,27 +95,24 @@
       gap: 20px; /* Spazio tra i pulsanti */
       margin-top: 40px; /* Spazio sopra i pulsanti */
       width: 100%; /* Permette al container di occupare la larghezza disponibile */
-      /* NON HA PIÙ MAX-WIDTH, i pulsanti al suo interno definiranno la larghezza del gruppo */
     }
 
-    /* Stili base per tutti i pulsanti (applicato al wrapper e al pulsante WhatsApp) */
+    /* Stili base per tutti i pulsanti */
     .google-style-button {
       font-family: 'Quicksand', sans-serif;
       font-weight: 700;
       padding: 12px 28px; /* Questo definisce l'altezza per entrambi i pulsanti */
       font-size: 1.05em;   
       width: fit-content; /* Larghezza si adatta al contenuto */
-      min-width: 320px; /* Forza una larghezza minima uguale per entrambi, basata sul testo più lungo */
+      min-width: 320px; /* Forza una larghezza minima uguale per entrambi */
       max-width: 100%; /* Assicura che non vadano oltre il 100% del loro contenitore */
-      height: auto; /* L'altezza è data dal padding e contenuto */
+      height: auto;
       box-sizing: border-box;
-      border-radius: 4px; /* Angoli standard di Google */
+      border-radius: 4px;
       cursor: pointer;
-      text-decoration: none; /* Per link (pulsanti WhatsApp) */
+      text-decoration: none;
       text-align: center;
-      /* Transizione per background-color, box-shadow, border-color, color */
       transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-      /* Utilizzato flexbox per centrare il contenuto del pulsante/wrapper */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -120,58 +120,57 @@
 
     /* Stile per il wrapper del pulsante primario (per Billetto) */
     .billetto-button-wrapper {
-      background-color: #06417c; /* Colore blu iniziale del widget Billetto */
-      color: white; /* Testo bianco */
+      background-color: #06417c;
+      color: white;
       border: none;
       box-shadow: 0 2px 3px rgba(0,0,0,0.2);
     }
-    /* Hover per il wrapper del pulsante Billetto */
     .billetto-button-wrapper:hover {
-      background-color: #053b70; /* NUOVO COLORE AL HOVER: più scuro come richiesto */
-      box-shadow: 0 3px 6px rgba(0,0,0,0.3); /* Ombra leggermente più pronunciata al hover */
+      background-color: #053b70; /* COLORE HOVER SPECIFICO */
+      box-shadow: 0 3px 6px rgba(0,0,0,0.3);
     }
 
     /* Stile per il widget Billetto *all'interno* del wrapper */
     .billetto-button-wrapper billetto-widget {
-        width: 100% !important; /* Forza il widget ad adattarsi al 100% del wrapper */
-        height: 100% !important; /* Forza l'altezza del widget ad adattarsi al 100% del wrapper */
+        width: 100% !important;
+        height: 100% !important;
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
     }
     .billetto-button-wrapper billetto-widget button {
-      background-color: transparent !important; /* Rendi trasparente il pulsante interno del widget */
-      color: transparent !important; /* Rendi trasparente il testo del pulsante interno */
+      background-color: transparent !important;
+      color: transparent !important;
       border: none !important;
       box-shadow: none !important;
       padding: 0 !important;
       margin: 0 !important;
       width: 100% !important;
       height: 100% !important;
-      font-size: 1em !important; /* Adatta il font size */
+      font-size: 1em !important;
     }
 
     /* Stile per il pulsante secondario (WhatsApp) */
     .whatsapp-button {
-      background-color: transparent; /* Sfondo trasparente */
-      color: #3c4043; /* Testo scuro */
-      border: 1px solid #06417c; /* Bordo blu, stesso colore iniziale del pulsante Billetto */
-      box-shadow: none; /* Nessuna ombra iniziale per outlined */
+      background-color: transparent;
+      color: #3c4043;
+      border: 1px solid #06417c;
+      box-shadow: none;
     }
     .whatsapp-button:hover {
-      background-color: rgba(60,64,67,0.04); /* Leggero sfondo grigio al hover */
-      border-color: #c5c8cb; /* Bordo leggermente più scuro al hover */
-      box-shadow: 0 1px 2px rgba(0,0,0,0.1); /* Leggera ombra al hover */
+      background-color: rgba(60,64,67,0.04);
+      border-color: #c5c8cb;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
     }
 
     /* Media Queries per schermi più piccoli */
     @media (max-width: 600px) {
-        .main-content-wrapper {
+        /* Rimosso padding dal main-content-wrapper e spostato nel content-centered-container */
+        .content-centered-container {
             padding: 20px 15px; /* Meno padding sui lati per mobile */
         }
         .google-style-button {
             min-width: unset; /* Rimuovi min-width su mobile, si adatteranno meglio */
-            /* width: 100%; (già specificato sopra per i pulsanti, e va bene così) */
         }
     }
   </style>
@@ -180,41 +179,43 @@
 
   <div class="main-content-wrapper">
 
-    <img src="https://marcovecchione.github.io/assorc/disney800350.png" alt="Musica Sotto le Stelle" class="header-image">
-    
-    <div class="content-section">
-      <p>
-        L'Associazione Orchestriamo presenta, con il patrocinio del Comune di Lauro e in collaborazione con il Demurgo, Eterea danze storiche e Pro Lauro, "Musica sotto le stelle", un concerto al buio della Lauro Symphony Orchestra, che si terrà domenica 21 agosto alle ore 21:00 al Castello Lancellotti di Lauro (AV).
-      </p>
-      <p>
-        È necessaria la prenotazione.
-      </p>
-      <p>
-        A differenza degli altri anni, questa volta è <strong style="color: #1a73e8;">possibile prenotare solamente online</strong>; contattando lo staff via WhatsApp sarà possibile, ove necessario, ricevere assistenza per la prenotazione.
-      </p>
-      <p class="note">
-        <strong>ATTENZIONE:</strong> I biglietti non sono riservati fino alla conclusione del pagamento.
-      </p>
-    </div>
+    <div class="content-centered-container">
 
-    <div class="button-container">
-      <div class="billetto-button-wrapper google-style-button">
-        <script src="https://billetto.it/widget.js"></script>
-        <billetto-widget 
-          type="button" 
-          event="1481892" 
-          organization="billetto.it" 
-          lang="it" 
-          theme="light" 
-          color="#06417c" 
-          button-style="rounded"
-        ></billetto-widget>
+      <img src="https://marcovecchione.github.io/assorc/disney800350.png" alt="Musica Sotto le Stelle" class="header-image">
+      
+      <div class="content-section">
+        <p>
+          L'Associazione Orchestriamo presenta, con il patrocinio del Comune di Lauro e in collaborazione con il Demurgo, Eterea danze storiche e Pro Lauro, "Musica sotto le stelle", un concerto al buio della Lauro Symphony Orchestra, che si terrà domenica 21 agosto alle ore 21:00 al Castello Lancellotti di Lauro (AV).
+        </p>
+        <p>
+          È necessaria la prenotazione.
+        </p>
+        <p>
+          A differenza degli altri anni, questa volta è <strong style="color: #1a73e8;">possibile prenotare solamente online</strong>; contattando lo staff via WhatsApp sarà possibile, ove necessario, ricevere assistenza per la prenotazione.
+        </p>
+        <p class="note">
+          <strong>ATTENZIONE:</strong> I biglietti non sono riservati fino alla conclusione del pagamento.
+        </p>
       </div>
 
-      <a href="https://wa.me/+390810099929" class="whatsapp-button google-style-button" target="_blank" rel="noopener noreferrer">
-        Contattaci se hai bisogno di aiuto per prenotare
-      </a>
-    </div>
+      <div class="button-container">
+        <div class="billetto-button-wrapper google-style-button">
+          <script src="https://billetto.it/widget.js"></script>
+          <billetto-widget 
+            type="button" 
+            event="1481892" 
+            organization="billetto.it" 
+            lang="it" 
+            theme="light" 
+            color="#06417c" 
+            button-style="rounded"
+          ></billetto-widget>
+        </div>
 
-  </div> </body>
+        <a href="https://wa.me/+390810099929" class="whatsapp-button google-style-button" target="_blank" rel="noopener noreferrer">
+          Contattaci se hai bisogno di aiuto per prenotare
+        </a>
+      </div>
+
+    </div> </div> </body>
 </html>
