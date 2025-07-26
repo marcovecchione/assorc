@@ -64,4 +64,155 @@
       text-align: left;
       font-size: 1.05em;
       line-height: 1.7;
-      margin-bottom
+      margin-bottom: 15px;
+    }
+
+    /* Stile per il testo evidenziato o le note */
+    .note {
+        font-size: 0.95em;
+        color: #5f6368;
+        border-left: 3px solid #fbbc04; /* Bordo giallo per attirare l'attenzione */
+        padding-left: 10px;
+        margin-top: 20px;
+    }
+
+
+    /* Contenitore per i pulsanti */
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Centra i pulsanti */
+      gap: 20px; /* Spazio tra i pulsanti */
+      margin-top: 40px; /* Spazio sopra i pulsanti */
+    }
+
+    /* Stili base per tutti i pulsanti */
+    .google-style-button {
+      font-family: 'Quicksand', sans-serif; /* FONT: impostato su Quicksand */
+      font-weight: 700; /* Quicksand Bold */
+      padding: 12px 28px;
+      font-size: 1.05em;   
+      width: fit-content;
+      min-width: 250px;
+      max-width: 100%;
+      height: auto;
+      box-sizing: border-box;
+      border-radius: 4px; /* Angoli standard di Google */
+      cursor: pointer;
+      text-decoration: none; /* Per link (pulsanti WhatsApp) */
+      text-align: center;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Stile per il pulsante primario (widget Billetto) */
+    .billetto-widget button { /* Sovrascrive per targettare specificamente il pulsante del widget */
+      /* Eredita da .google-style-button e applica le specificità */
+      background-color: #06417c !important; /* Blu standard di Google */
+      color: white !important;
+      border: none !important;
+      box-shadow: 0 2px 3px rgba(0,0,0,0.2) !important;
+    }
+    .billetto-widget button:hover {
+      background-color: #1565c0 !important; /* Blu più scuro al hover */
+      box-shadow: 0 3px 6px rgba(0,0,0,0.3) !important;
+    }
+
+    /* Stile per il pulsante secondario (WhatsApp) */
+    .whatsapp-button {
+      /* Eredita da .google-style-button e applica le specificità */
+      background-color: transparent; /* Sfondo trasparente */
+      color: #3c4043; /* Testo scuro */
+      border: 1px solid #06417c;
+      box-shadow: none; /* Nessuna ombra iniziale per outlined */
+    }
+    .whatsapp-button:hover {
+      background-color: rgba(60,64,67,0.04); /* Leggero sfondo grigio al hover */
+      border-color: #c5c8cb; /* Bordo leggermente più scuro al hover */
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1); /* Leggera ombra al hover */
+    }
+
+    /* Stili per il popup/modale di Billetto all'interno dell'iframe */
+    .billetto-modal-overlay,
+    .billetto-modal-container,
+    .billetto-modal-wrapper,
+    .billetto-modal-dialog,
+    .billetto-modal {
+      width: 100% !important; 
+      height: 100% !important;
+      max-width: none !important;
+      max-height: none !important;
+      background-color: rgba(0, 0, 0, 0.7) !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      position: absolute !important; /* Posizione assoluta rispetto al body dell'iframe */
+      top: 0 !important;
+      left: 0 !important;
+      z-index: 99999 !important;
+      overflow: auto !important;
+    }
+
+    /* Stili per il contenuto effettivo del popup (l'iframe di Billetto) */
+    .billetto-modal-content iframe,
+    .billetto-modal-dialog iframe,
+    iframe[src*="billetto.it/e/"] {
+      width: 90% !important;
+      height: 90% !important;
+      border: none !important;
+      border-radius: 5px;
+    }
+
+    /* Media Queries per schermi più piccoli */
+    @media (max-width: 600px) {
+        .main-content-wrapper {
+            padding: 20px 15px; /* Meno padding sui lati per mobile */
+        }
+        .google-style-button {
+            min-width: unset; /* Rimuovi min-width per mobile, si adatterà meglio */
+            width: 100%; /* Occupa tutta la larghezza disponibile */
+            padding: 12px 20px;
+        }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="main-content-wrapper">
+
+    <img src="https://marcovecchione.github.io/assorc/disney800350.png" alt="Musica Sotto le Stelle" class="header-image">
+    
+    <div class="content-section">
+      <p>
+        L'Associazione Orchestriamo presenta, con il patrocinio del Comune di Lauro e in collaborazione con il Demurgo, Eterea danze storiche e Pro Lauro, "Musica sotto le stelle", un concerto al buio della Lauro Symphony Orchestra, che si terrà domenica 21 agosto alle ore 21:00 al Castello Lancellotti di Lauro (AV).
+      </p>
+      <p>
+        È necessaria la prenotazione.
+      </p>
+      <p>
+        A differenza degli altri anni, questa volta è <strong style="color: #1a73e8;">possibile prenotare solamente online</strong>; contattando lo staff via WhatsApp sarà possibile, ove necessario, ricevere assistenza per la prenotazione.
+      </p>
+      <p class="note">
+        <strong>ATTENZIONE:</strong> I biglietti non sono riservati fino alla conclusione del pagamento.
+      </p>
+    </div>
+
+    <div class="button-container">
+      <script src="https://billetto.it/widget.js"></script>
+      <billetto-widget 
+        type="button" 
+        event="1481892" 
+        organization="billetto.it" 
+        lang="it" 
+        theme="light" 
+        color="#06417c" 
+        button-style="rounded"
+      ></billetto-widget>
+
+      <a href="https://wa.me/+390810099929" class="whatsapp-button google-style-button" target="_blank" rel="noopener noreferrer">
+        Contattaci se hai bisogno di aiuto per prenotare
+      </a>
+    </div>
+
+  </div> </body>
+</html>
