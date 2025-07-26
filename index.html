@@ -1,225 +1,35 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acquista Biglietti Evento e Contatti</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
-
-
-  <style>
-    /* Reset base per il body della pagina HTML esterna */
-    body {
-      margin: 0;
-      padding: 0;
-      /* Imposta un'altezza minima per il contenuto dell'iframe, aggiusta se necessario */
-      min-height: 800px; /* Aumentato un po' per dare più spazio */
-      display: flex;
-      justify-content: center; /* Centra orizzontalmente il main-content-wrapper */
-      align-items: flex-start; /* Allinea il contenuto in alto */
-      background-color: transparent; /* Sfondo trasparente per l'iframe in Google Sites */
-      font-family: 'Quicksand', sans-serif; /* FONT: impostato su Quicksand */
-      color: #3c4043; /* Colore testo scuro, standard Google */
-      line-height: 1.6;
-    }
-
-    /* Contenitore principale per tutti i contenuti, per centrarli e limitarne la larghezza */
-    .main-content-wrapper {
-      max-width: 960px; /* Larghezza massima del contenuto per desktop (simil Google Sites) */
-      width: 100%; /* Occupa tutta la larghezza disponibile fino al max-width */
-      padding: 40px 30px; /* Padding interno ai lati, come margini della pagina di esempio */
-      box-sizing: border-box; /* Include padding nella larghezza */
-      background-color: #ffffff; /* Sfondo bianco per il contenuto, come la pagina di esempio */
-      /* Rimosse ombre e bordi arrotondati per replicare un'integrazione più "fluida" con Google Sites */
-    }
-
-    /* Stile per l'immagine di titolo/banner */
-    .header-image {
-      max-width: 100%; /* Si adatta alla larghezza del main-content-wrapper */
-      height: auto; /* Mantiene le proporzioni */
-      display: block; /* Rimuove lo spazio extra sotto l'immagine */
-      margin: 0 auto 30px auto; /* Centra l'immagine e aggiunge spazio sotto */
-      /* Rimosse bordi arrotondati e ombre per coerenza con l'header di Google Sites */
-    }
-
-    /* Stile per la sezione della descrizione e dei dettagli */
-    .content-section {
-      padding: 0 0px; /* Nessun padding extra qui, già nel wrapper */
-      margin-bottom: 30px;
-    }
-
-    /* Stile per i titoli all'interno della sezione (es. "ATTENZIONE") */
-    .content-section h2 {
-        font-family: 'Quicksand', sans-serif; /* FONT: impostato su Quicksand */
-        font-size: 1.5em;
-        font-weight: 700; /* Quicksand Bold */
-        color: #202124;
-        margin-top: 0;
-        margin-bottom: 15px;
-    }
-
-    /* Stile per il testo della descrizione */
-    .content-section p {
-      text-align: left;
-      font-size: 1.05em;
-      line-height: 1.7;
-      margin-bottom: 15px;
-    }
-
-    /* Stile per il testo evidenziato o le note */
-    .note {
-        font-size: 0.95em;
-        color: #5f6368;
-        border-left: 3px solid #fbbc04; /* Bordo giallo per attirare l'attenzione */
-        padding-left: 10px;
-        margin-top: 20px;
-    }
-
-
-    /* Contenitore per i pulsanti */
-    .button-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center; /* Centra i pulsanti */
-      gap: 20px; /* Spazio tra i pulsanti */
-      margin-top: 40px; /* Spazio sopra i pulsanti */
-      
-      /* MODIFICATO: NUOVE REGOLE PER CONTROLLARE LA LARGHEZZA DEI PULSANTI TRAMITE IL CONTENITORE */
-      width: 100%; /* Il contenitore occupa tutta la larghezza disponibile del main-content-wrapper */
-      max-width: 350px; /* IMPOSTA QUI LA LARGHEZZA MASSIMA DESIDERATA PER I PULSANTI. Ad esempio 350px. */
-      /* Questo max-width farà in modo che i pulsanti (che saranno al 100%) non superino questa larghezza. */
-    }
-
-    /* Stili base per tutti i pulsanti */
-    .google-style-button {
-      font-family: 'Quicksand', sans-serif;
-      font-weight: 700;
-      padding: 12px 28px;
-      font-size: 1.05em;   
-      
-      /* MODIFICATO: Farà in modo che il pulsante riempia il contenitore */
-      width: 100%; /* Il pulsante occuperà il 100% del suo genitore (.button-container) */
-      min-width: unset; /* Rimuove qualsiasi min-width che potrebbe impedire al 100% di funzionare */
-      max-width: 100%; /* Assicura che non vada oltre il contenitore */
-      
-      height: auto;
-      box-sizing: border-box;
-      border-radius: 4px;
-      cursor: pointer;
-      text-decoration: none;
-      text-align: center;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-      display: block; /* Necessario per far sì che il 100% della larghezza venga applicato correttamente */
-    }
-
-    /* Stile per il pulsante primario (widget Billetto) */
-    .billetto-widget button {
-      background-color: #06417c !important;
+/* Stile per il pulsante primario (widget Billetto) */
+    .billetto-widget button { /* Sovrascrive per targettare specificamente il pulsante del widget */
+      /* Eredita da .google-style-button e applica le specificità */
+      background-color: #06417c !important; /* Blu standard di Google */
       color: white !important;
       border: none !important;
-      box-shadow: 0 2px 3px rgba(0,0,0,0.2) !important; /* L'ombra è gestita qui */
+      box-shadow: 0 2px 3px rgba(0,0,0,0.2) !important;
 
-      /* FORZATURA ULTERIORE PER IL WIDGET, ASSICURATI CHE SIANO PRESENTI E CON !important */
-      width: 100% !important; /* Questo è cruciale per forzare il widget a riempire il contenitore */
-      min-width: unset !important; /* Rimuove qualsiasi min-width impostato dal widget */
-      max-width: 100% !important; /* Assicura che non sforo la larghezza del contenitore */
-      display: block !important; /* Fondamentale per il comportamento di larghezza */
-      margin: 0 auto !important; /* Centratura del pulsante */
-      
-      /* Aggiunta di un padding extra per il caso in cui il widget lo rimuova */
-      padding: 12px 28px !important; /* Riconferma il padding desiderato */
+      /* NUOVE MODIFICHE QUI SOTTO PER LA LARGHEZZA E POSIZIONAMENTO */
+      width: 100% !important; /* Forza la larghezza al 100% del suo contenitore */
+      min-width: unset !important; /* Rimuove il min-width che potrebbe limitarlo */
+      max-width: 100% !important; /* Assicura che non vada oltre */
+      display: block !important; /* Assicura che si comporti come un blocco per occupare la larghezza */
+      margin: 0 auto !important; /* Centra il pulsante se il suo contenitore è più largo */
+    }
+    .billetto-widget button:hover {
+      background-color: #1565c0 !important; /* Blu più scuro al hover */
+      box-shadow: 0 3px 6px rgba(0,0,0,0.3) !important;
     }
 
-    /* Stile per il pulsante secondario (WhatsApp) - non necessita grandi modifiche oltre all'ereditarietà */
+    /* Stile per il pulsante secondario (WhatsApp) */
     .whatsapp-button {
       /* Eredita da .google-style-button e applica le specificità */
-      background-color: transparent;
-      color: #3c4043;
+      background-color: transparent; /* Sfondo trasparente */
+      color: #3c4043; /* Testo scuro */
       border: 1px solid #06417c;
       box-shadow: none; /* Nessuna ombra iniziale per outlined */
+
+      /* Mantieni queste per il WhatsApp button */
+      width: 100%; /* Già al 100% */
+      min-width: unset; /* Già unset per mobile, ma assicuriamolo */
+      max-width: 100%;
+      display: block;
+      margin: 0 auto;
     }
-    /* Stili per il popup/modale di Billetto all'interno dell'iframe */
-    .billetto-modal-overlay,
-    .billetto-modal-container,
-    .billetto-modal-wrapper,
-    .billetto-modal-dialog,
-    .billetto-modal {
-      width: 100% !important; 
-      height: 100% !important;
-      max-width: none !important;
-      max-height: none !important;
-      background-color: rgba(0, 0, 0, 0.7) !important;
-      display: flex !important;
-      justify-content: center !important;
-      align-items: center !important;
-      position: absolute !important; /* Posizione assoluta rispetto al body dell'iframe */
-      top: 0 !important;
-      left: 0 !important;
-      z-index: 99999 !important;
-      overflow: auto !important;
-    }
-
-    /* Stili per il contenuto effettivo del popup (l'iframe di Billetto) */
-    .billetto-modal-content iframe,
-    .billetto-modal-dialog iframe,
-    iframe[src*="billetto.it/e/"] {
-      width: 90% !important;
-      height: 90% !important;
-      border: none !important;
-      border-radius: 5px;
-    }
-
-    /* Media Queries per schermi più piccoli */
-    @media (max-width: 600px) {
-        .main-content-wrapper {
-            padding: 20px 15px; /* Meno padding sui lati per mobile */
-        }
-        .google-style-button {
-            min-width: unset; /* Rimuovi min-width per mobile, si adatterà meglio */
-            width: 100%; /* Occupa tutta la larghezza disponibile */
-            padding: 12px 20px;
-        }
-    }
-
-  </style>
-</head>
-<body>
-
-  <div class="main-content-wrapper">
-
-    <img src="https://marcovecchione.github.io/assorc/disney800350.png" alt="Musica Sotto le Stelle" class="header-image">
-    
-    <div class="content-section">
-      <p>
-        L'Associazione Orchestriamo presenta, con il patrocinio del Comune di Lauro e in collaborazione con il Demurgo, Eterea danze storiche e Pro Lauro, "Musica sotto le stelle", un concerto al buio della Lauro Symphony Orchestra, che si terrà domenica 21 agosto alle ore 21:00 al Castello Lancellotti di Lauro (AV).
-      </p>
-      <p>
-        È necessaria la prenotazione.
-      </p>
-      <p>
-        A differenza degli altri anni, questa volta è <strong style="color: #1a73e8;">possibile prenotare solamente online</strong>; contattando lo staff via WhatsApp sarà possibile, ove necessario, ricevere assistenza per la prenotazione.
-      </p>
-      <p class="note">
-        <strong>ATTENZIONE:</strong> I biglietti non sono riservati fino alla conclusione del pagamento.
-      </p>
-    </div>
-
-    <div class="button-container">
-      <script src="https://billetto.it/widget.js"></script>
-      <billetto-widget 
-        type="button" 
-        event="1481892" 
-        organization="billetto.it" 
-        lang="it" 
-        theme="light" 
-        color="#06417c" 
-        button-style="rounded"
-      ></billetto-widget>
-
-      <a href="https://wa.me/+390810099929" class="whatsapp-button google-style-button" target="_blank" rel="noopener noreferrer">
-        Contattaci se hai bisogno di aiuto per prenotare
-      </a>
-    </div>
-
-  </div> </body> </html>
