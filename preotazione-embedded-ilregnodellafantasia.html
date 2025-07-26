@@ -18,19 +18,20 @@
       font-family: 'Quicksand', sans-serif;
       color: #3c4043;
       line-height: 1.6;
+      background-color: #ffffff; /* AGGIUNTO: Assicura che tutto lo sfondo sia bianco per evitare sfondi indesiderati */
 
       display: block; /* Il body si comporta come un blocco normale */
     }
 
     /* Contenitore per l'immagine di sfondo con effetto di parallasse */
     .parallax-bg-image {
-      position: fixed; /* CAMBIATO: L'immagine rimane fissa nella viewport */
+      position: fixed; /* L'immagine rimane fissa nella viewport */
       top: 0;
       left: 0;
       width: 100%;
-      height: 100vh; /* CAMBIATO: L'immagine copre l'intera altezza della viewport per l'effetto "mostra il centro" */
+      height: 100vh; /* L'immagine copre l'intera altezza della viewport per l'effetto "mostra il centro" */
       background-image: url('https://marcovecchione.github.io/files-di-associazioneorchestriamo/disney800350.png'); /* La tua immagine di sfondo */
-      background-size: cover; /* CAMBIATO: L'immagine copre l'intero div, ritagliando se necessario. Essenziale per l'effetto "mostra il centro" */
+      background-size: cover; /* L'immagine copre l'intero div, ritagliando se necessario. Essenziale per l'effetto "mostra il centro" */
       background-position: center center; /* Centra l'immagine all'interno del div */
       background-repeat: no-repeat;
       z-index: -1; /* Posiziona questo div dietro tutti gli altri contenuti */
