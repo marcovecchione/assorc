@@ -6,66 +6,86 @@
   <title>Acquista Biglietti Evento e Contatti</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
 
   <style>
     /* Reset base per il body della pagina HTML esterna */
     body {
       margin: 0;
-      padding: 20px; /* Un po' di padding generale per non far attaccare i contenuti ai bordi */
-      min-height: 650px; /* Altezza minima del body per l'iframe, adatta se il popup è tagliato */
+      padding: 0; /* Rimuovi padding dal body, lo mettiamo sul wrapper interno */
+      min-height: 700px; /* Aumentato un po' l'altezza minima per il popup di Billetto */
       display: flex;
-      flex-direction: column; /* Organizza gli elementi in colonna */
-      align-items: center; /* Centra gli elementi orizzontalmente */
-      justify-content: flex-start; /* Inizia gli elementi dall'alto */
-      background-color: transparent; /* Sfondo trasparente per l'iframe in Google Sites */
-      font-family: 'Quicksand', sans-serif;
-      color: #333; /* Colore testo predefinito */
+      justify-content: center; /* Centra il wrapper principale */
+      align-items: flex-start; /* Allinea il contenuto in alto nel body */
+      background-color: #f8f9fa; /* Sfondo leggermente grigio chiaro come la pagina di esempio */
+      font-family: 'Roboto', sans-serif; /* Cambiato a Roboto per avvicinarsi alla pagina di esempio */
+      color: #3c4043; /* Colore testo leggermente più scuro per la leggibilità */
       line-height: 1.6;
+    }
+
+    /* Contenitore principale per tutti i contenuti, per centrarli e limitarne la larghezza */
+    .main-content-wrapper {
+      max-width: 900px; /* Larghezza massima del contenuto, come nella pagina di esempio */
+      width: 100%; /* Occupa tutta la larghezza disponibile fino al max-width */
+      padding: 30px 25px; /* Padding interno ai lati, come margini della pagina di esempio */
+      box-sizing: border-box; /* Include padding nella larghezza */
+      background-color: #ffffff; /* Sfondo bianco per il contenuto, come la pagina di esempio */
+      border-radius: 8px; /* Angoli arrotondati per il contenitore, se vuoi un effetto "scheda" */
+      box-shadow: 0 1px 2px 0 rgba(60,64,67,0.30), 0 1px 3px 1px rgba(60,64,67,0.15); /* Ombra leggera */
     }
 
     /* Stile per l'immagine di titolo */
     .title-image {
-      max-width: 60%; /* Si adatta alla larghezza del contenitore (l'iframe) */
+      max-width: 100%; /* Si adatta alla larghezza del main-content-wrapper */
       height: auto; /* Mantiene le proporzioni */
       display: block; /* Rimuove lo spazio extra sotto l'immagine */
-      margin-bottom: 25px; /* Spazio sotto l'immagine */
+      margin: 0 auto 30px auto; /* Centra l'immagine e aggiunge spazio sotto */
+      border-radius: 8px; /* Angoli arrotondati per l'immagine */
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Ombra leggera per l'immagine */
     }
 
     /* Stile per la descrizione */
     .description {
-      text-align: center;
+      text-align: left; /* Allinea il testo a sinistra come nella pagina di esempio */
       margin-bottom: 30px; /* Spazio sotto la descrizione */
-      max-width: 700px; /* Larghezza massima per il testo */
+      font-size: 1.05em; /* Dimensione del font leggermente maggiore */
     }
 
-    /* Stile per il contenitore del widget Billetto per un controllo migliore sul posizionamento */
-    .billetto-widget-container {
-      margin-bottom: 30px; /* Spazio sotto il pulsante Billetto */
-      text-align: center; /* Centra il pulsante Billetto se non già centrato da flex */
+    /* Stile per il contenitore del widget Billetto e pulsante WhatsApp */
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Centra i pulsanti */
+      gap: 20px; /* Spazio tra i pulsanti */
+      margin-bottom: 20px;
     }
 
     /* Stili per il pulsante generato dal widget Billetto */
     .billetto-widget button {
-      font-family: 'Quicksand', sans-serif !important;
-      padding: 15px 30px !important;
-      font-size: 1.2em !important;
+      font-family: 'Roboto', sans-serif !important; /* Font del pulsante */
+      font-weight: 500 !important; /* Leggermente più spesso */
+      padding: 12px 28px !important; /* Padding leggermente ridotto per avvicinarsi allo stile Google */
+      font-size: 1.05em !important;   
       
-      /* ***** IMPOSTA QUI LA LARGHEZZA ESATTA DEL TUO PULSANTE DI RIFERIMENTO ***** */
-      width: 500px !important; /* Esempio: larghezza fissa. Sostituisci questo valore. */
-      /* ************************************************************************** */
+      width: fit-content !important; /* Larghezza si adatta al testo */
+      min-width: 250px !important; /* Larghezza minima per il pulsante */
+      max-width: 100% !important; /* Limita la larghezza massima per schermi molto stretti */
       
       height: auto !important;
       box-sizing: border-box !important;
-      border-radius: 8px !important;
-      background-color: #06417c !important; /* Colore del pulsante */
+      border-radius: 4px !important; /* Angoli meno arrotondati per avvicinarsi allo stile Google */
+      background-color: #1a73e8 !important; /* Colore blu di Google */
       color: white !important;
       border: none !important;
       cursor: pointer !important;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 2px 3px rgba(0,0,0,0.2); /* Ombra per il pulsante */
     }
 
     .billetto-widget button:hover {
-      background-color: #052e59 !important;
+      background-color: #1565c0 !important; /* Blu più scuro al hover */
+      box-shadow: 0 3px 6px rgba(0,0,0,0.3); /* Ombra più pronunciata al hover */
     }
 
     /* Stili per il popup/modale di Billetto all'interno dell'iframe */
@@ -101,51 +121,60 @@
 
     /* Stili per il pulsante WhatsApp */
     .whatsapp-button {
-      display: inline-block; /* Rende il link simile a un pulsante */
-      padding: 15px 30px;
-      font-size: 1.1em;
-      background-color: #06417c; 
+      display: inline-block;
+      padding: 12px 28px;
+      font-size: 1.05em;
+      background-color: #1a73e8; /* Colore blu di Google */
       color: white;
-      text-decoration: none; /* Rimuove la sottolineatura del link */
+      text-decoration: none;
       border: none;
-      border-radius: 8px;
+      border-radius: 4px; /* Angoli meno arrotondati */
       cursor: pointer;
-      font-family: 'Quicksand', sans-serif;
-      transition: background-color 0.3s ease;
+      font-family: 'Roboto', sans-serif; /* Font del pulsante */
+      font-weight: 500;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
       text-align: center;
+      width: fit-content; /* Si adatta al contenuto */
+      min-width: 250px; /* Larghezza minima */
+      max-width: 100%; /* Limita la larghezza massima */
+      box-shadow: 0 2px 3px rgba(0,0,0,0.2); /* Ombra per il pulsante */
     }
 
     .whatsapp-button:hover {
-      background-color: #1DA851;
+      background-color: #1565c0; /* Blu più scuro al hover */
+      box-shadow: 0 3px 6px rgba(0,0,0,0.3); /* Ombra più pronunciata al hover */
     }
   </style>
 </head>
 <body>
 
-  <img src="https://marcovecchione.github.io/assorc/disney800450.png" alt="Titolo Evento" class="title-image">
-  <p class="description">
-    QUESTO È IL TESTO DELLA DESCRIZIONE.
-    Qui puoi inserire tutte le informazioni rilevanti sull'evento, dettagli,
-    cosa include la prenotazione, o qualsiasi altro messaggio tu voglia comunicare ai tuoi utenti.
-    Sarà centrato e facilmente leggibile.
-  </p>
+  <div class="main-content-wrapper">
 
-  <div class="billetto-widget-container">
-    <script src="https://billetto.it/widget.js"></script>
-    <billetto-widget 
-      type="button" 
-      event="1481892" 
-      organization="billetto.it" 
-      lang="it" 
-      theme="light" 
-      color="#06417c" 
-      button-style="rounded"
-    ></billetto-widget>
-  </div>
+    <img src="https://marcovecchione.github.io/assorc/disney800450.png" alt="Titolo Evento" class="title-image">
+    
+    <p class="description">
+      **QUESTO È IL TESTO DELLA DESCRIZIONE.**
+      Qui puoi inserire tutte le informazioni rilevanti sull'evento, dettagli,
+      cosa include la prenotazione, o qualsiasi altro messaggio tu voglia comunicare ai tuoi utenti.
+      Sarà centrato all'interno della pagina incorporata e il testo sarà allineato a sinistra.
+    </p>
 
-  <a href="https://wa.me/+390810099929" class="whatsapp-button" target="_blank" rel="noopener noreferrer">
-    Contattaci se hai bisogno di aiuto per prenotare
-  </a>
+    <div class="button-container">
+      <script src="https://billetto.it/widget.js"></script>
+      <billetto-widget 
+        type="button" 
+        event="1481892" 
+        organization="billetto.it" 
+        lang="it" 
+        theme="light" 
+        color="#06417c" 
+        button-style="rounded"
+      ></billetto-widget>
 
-</body>
+      <a href="https://wa.me/+390810099929" class="whatsapp-button" target="_blank" rel="noopener noreferrer">
+        Contattaci se hai bisogno di aiuto per prenotare
+      </a>
+    </div>
+
+  </div> </body>
 </html>
