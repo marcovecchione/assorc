@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Acquista Biglietti Evento e Contatti</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
 
 
   <style>
@@ -14,166 +13,55 @@
     body {
       margin: 0;
       padding: 0;
-      min-height: 700px; /* Altezza minima per l'iframe in Google Sites */
+      /* Imposta un'altezza minima per il contenuto dell'iframe, aggiusta se necessario */
+      min-height: 800px; /* Aumentato un po' per dare più spazio */
       display: flex;
-      justify-content: center; /* Centra il wrapper principale orizzontalmente */
-      align-items: flex-start; /* Allinea il contenuto in alto nel body */
-      background-color: transparent; /* Sfondo trasparente per l'iframe, per usare lo sfondo di Google Sites */
-      font-family: 'Roboto', sans-serif; /* Font principale, simile a quello di Google Sites */
-      color: #3c4043; /* Colore testo scuro, come standard Google */
+      justify-content: center; /* Centra orizzontalmente il main-content-wrapper */
+      align-items: flex-start; /* Allinea il contenuto in alto */
+      background-color: transparent; /* Sfondo trasparente per l'iframe in Google Sites */
+      font-family: 'Quicksand', sans-serif; /* FONT: impostato su Quicksand */
+      color: #3c4043; /* Colore testo scuro, standard Google */
       line-height: 1.6;
     }
 
     /* Contenitore principale per tutti i contenuti, per centrarli e limitarne la larghezza */
     .main-content-wrapper {
-      max-width: 100%; /* Occupa tutta la larghezza disponibile fino al max-width */
-      padding: 30px 25px; /* Padding interno ai lati, come margini della pagina di esempio */
+      max-width: 960px; /* Larghezza massima del contenuto per desktop (simil Google Sites) */
+      width: 100%; /* Occupa tutta la larghezza disponibile fino al max-width */
+      padding: 40px 30px; /* Padding interno ai lati, come margini della pagina di esempio */
       box-sizing: border-box; /* Include padding nella larghezza */
       background-color: #ffffff; /* Sfondo bianco per il contenuto, come la pagina di esempio */
-      border-radius: 8px; /* Angoli arrotondati per il contenitore, se vuoi un effetto "scheda" */
-      box-shadow: 0 1px 2px 0 rgba(60,64,67,0.30), 0 1px 3px 1px rgba(60,64,67,0.15); /* Ombra leggera */
+      /* Rimosse ombre e bordi arrotondati per replicare un'integrazione più "fluida" con Google Sites */
     }
 
-    /* Stile per l'immagine di titolo */
-    .title-image {
+    /* Stile per l'immagine di titolo/banner */
+    .header-image {
       max-width: 100%; /* Si adatta alla larghezza del main-content-wrapper */
       height: auto; /* Mantiene le proporzioni */
       display: block; /* Rimuove lo spazio extra sotto l'immagine */
       margin: 0 auto 30px auto; /* Centra l'immagine e aggiunge spazio sotto */
-      border-radius: 8px; /* Angoli arrotondati per l'immagine */
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Ombra leggera per l'immagine */
+      /* Rimosse bordi arrotondati e ombre per coerenza con l'header di Google Sites */
     }
 
-    /* Stile per la descrizione */
-    .description {
-      text-align: left; /* Allinea il testo a sinistra come nella pagina di esempio */
-      margin-bottom: 30px; /* Spazio sotto la descrizione */
-      font-size: 1.05em; /* Dimensione del font leggermente maggiore */
+    /* Stile per la sezione della descrizione e dei dettagli */
+    .content-section {
+      padding: 0 0px; /* Nessun padding extra qui, già nel wrapper */
+      margin-bottom: 30px;
     }
 
-    /* Contenitore per i pulsanti per una migliore gestione dello spazio tra loro */
-    .button-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center; /* Centra i pulsanti */
-      gap: 20px; /* Spazio tra i pulsanti */
-      margin-bottom: 20px;
+    /* Stile per i titoli all'interno della sezione (es. "ATTENZIONE") */
+    .content-section h2 {
+        font-family: 'Quicksand', sans-serif; /* FONT: impostato su Quicksand */
+        font-size: 1.5em;
+        font-weight: 700; /* Quicksand Bold */
+        color: #202124;
+        margin-top: 0;
+        margin-bottom: 15px;
     }
 
-    /* Stili per il pulsante generato dal widget Billetto (Pulsante Primario Blu) */
-    .billetto-widget button {
-      font-family: 'Roboto', sans-serif !important;
-      font-weight: 500 !important;
-      padding: 12px 28px !important;
-      font-size: 1.05em !important;   
-      
-      width: fit-content !important;
-      min-width: 250px !important;
-      max-width: 100% !important;
-      
-      height: auto !important;
-      box-sizing: border-box !important;
-      border-radius: 4px !important;
-      background-color: #1a73e8 !important; /* Blu standard di Google per pulsanti primari */
-      color: white !important;
-      border: none !important;
-      cursor: pointer !important;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 2px 3px rgba(0,0,0,0.2); /* Ombra leggera */
-    }
-
-    .billetto-widget button:hover {
-      background-color: #1565c0 !important; /* Blu più scuro al hover */
-      box-shadow: 0 3px 6px rgba(0,0,0,0.3); /* Ombra più pronunciata al hover */
-    }
-
-    /* Stili per il popup/modale di Billetto all'interno dell'iframe */
-    .billetto-modal-overlay,
-    .billetto-modal-container,
-    .billetto-modal-wrapper,
-    .billetto-modal-dialog,
-    .billetto-modal {
-      width: 100% !important; 
-      height: 100% !important;
-      max-width: none !important;
-      max-height: none !important;
-      background-color: rgba(0, 0, 0, 0.7) !important;
-      display: flex !important;
-      justify-content: center !important;
-      align-items: center !important;
-      position: absolute !important; /* Posizione assoluta rispetto al body dell'iframe */
-      top: 0 !important;
-      left: 0 !important;
-      z-index: 99999 !important;
-      overflow: auto !important;
-    }
-
-    /* Stili per il contenuto effettivo del popup (l'iframe di Billetto) */
-    .billetto-modal-content iframe,
-    .billetto-modal-dialog iframe,
-    iframe[src*="billetto.it/e/"] {
-      width: 90% !important;
-      height: 90% !important;
-      border: none !important;
-      border-radius: 5px;
-    }
-
-    /* Stili per il pulsante WhatsApp (Pulsante Secondario Outlined) */
-    .whatsapp-button {
-      display: inline-block;
-      padding: 12px 28px;
+    /* Stile per il testo della descrizione */
+    .content-section p {
+      text-align: left;
       font-size: 1.05em;
-      background-color: transparent; /* Sfondo trasparente */
-      color: #3c4043; /* Testo scuro */
-      border: 1px solid #dadce0; /* Bordo grigio chiaro, come nella foto */
-      border-radius: 4px;
-      cursor: pointer;
-      font-family: 'Roboto', sans-serif;
-      font-weight: 500;
-      text-decoration: none;
-      transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-      text-align: center;
-      width: fit-content;
-      min-width: 250px;
-      max-width: 100%;
-    }
-
-    .whatsapp-button:hover {
-      background-color: rgba(60,64,67,0.04); /* Leggero sfondo grigio/blu al hover */
-      border-color: #c5c8cb; /* Bordo leggermente più scuro al hover */
-      box-shadow: 0 1px 2px rgba(0,0,0,0.1); /* Leggera ombra al hover */
-    }
-  </style>
-</head>
-<body>
-
-  <div class="main-content-wrapper">
-
-    <img src="https://marcovecchione.github.io/assorc/disney800450.png" alt="Titolo Evento" class="title-image">
-    
-    <p class="description">
-      **QUESTO È IL TESTO DELLA DESCRIZIONE.**
-      Qui puoi inserire tutte le informazioni rilevanti sull'evento, dettagli,
-      cosa include la prenotazione, o qualsiasi altro messaggio tu voglia comunicare ai tuoi utenti.
-      Sarà centrato all'interno della pagina incorporata e il testo sarà allineato a sinistra.
-    </p>
-
-    <div class="button-container">
-      <script src="https://billetto.it/widget.js"></script>
-      <billetto-widget 
-        type="button" 
-        event="1481892" 
-        organization="billetto.it" 
-        lang="it" 
-        theme="light" 
-        color="#06417c" 
-        button-style="rounded"
-      ></billetto-widget>
-
-      <a href="https://wa.me/+390810099929" class="whatsapp-button" target="_blank" rel="noopener noreferrer">
-        Contattaci se hai bisogno di aiuto per prenotare
-      </a>
-    </div>
-
-  </div> </body>
-</html>
+      line-height: 1.7;
+      margin-bottom
