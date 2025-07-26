@@ -11,24 +11,36 @@
     /* Reset base per il body della pagina HTML esterna */
     body {
       margin: 0;
-      padding: 0;
-      min-height: 900px; /* Altezza minima aumentata per prevenire tagli */
-      display: flex;
+      padding: 0; /* Inizialmente 0, il padding-top verrà aggiunto per lo scroll */
+      
+      /* NUOVE PROPRIETÀ PER L'IMMAGINE DI SFONDO FISSA E A TUTTO SCHERMO */
+      background-image: url('https://marcovecchione.github.io/assorc/disney800350.png'); /* La tua immagine di sfondo */
+      background-size: cover; /* Copre interamente l'area disponibile */
+      background-attachment: fixed; /* L'immagine rimane fissa mentre il contenuto scorre */
+      background-position: center center; /* Centra l'immagine di sfondo */
+      background-repeat: no-repeat; /* Evita la ripetizione dell'immagine */
+      
+      /* Permette al main-content-wrapper di iniziare dopo un'intera schermata della foto */
+      padding-top: 100vh; /* Spinge il contenuto principale giù di un'altezza di viewport */
+      min-height: 100vh; /* Assicura che il body sia almeno alto come la viewport per la visibilità iniziale */
+
+      display: flex; /* Mantiene il flex per centrare il main-content-wrapper */
       justify-content: center; /* Centra orizzontalmente il main-content-wrapper */
-      align-items: flex-start; /* Allinea il contenuto in alto */
-      background-color: transparent; /* Sfondo trasparente per l'iframe in Google Sites */
-      font-family: 'Quicksand', sans-serif; /* FONT: impostato su Quicksand */
-      color: #3c4043; /* Colore testo scuro, standard Google */
+      align-items: flex-start; /* Allinea il main-content-wrapper in alto (dopo il padding) */
+
+      font-family: 'Quicksand', sans-serif;
+      color: #3c4043;
       line-height: 1.6;
     }
 
     /* Contenitore principale per tutti i contenuti, per centrarli e limitarne la larghezza */
     .main-content-wrapper {
-      max-width: 960px; /* Larghezza massima del contenuto per desktop (simil Google Sites) */
+      max-width: 960px; /* Larghezza massima del contenuto per desktop */
       width: 100%; /* Occupa tutta la larghezza disponibile fino al max-width */
-      padding: 40px 30px; /* Padding interno ai lati, come margini della pagina di esempio */
+      padding: 40px 30px; /* Padding interno ai lati */
       box-sizing: border-box; /* Include padding nella larghezza */
-      background-color: #ffffff; /* Sfondo bianco per il contenuto, come la pagina di esempio */
+      background-color: #ffffff; /* SFONDO BIANCO: ESSENZIALE PER COPRIRE L'IMMAGINE FISSA QUANDO SI SCORRE */
+      /* Rimosse ombre e bordi arrotondati per replicare un'integrazione più "fluida" con Google Sites */
     }
 
     /* Stile per l'immagine di titolo/banner */
@@ -115,7 +127,7 @@
     }
     /* Hover per il wrapper del pulsante Billetto */
     .billetto-button-wrapper:hover {
-      background-color: #053b70; /* NUOVO COLORE AL HOVER: più scuro */
+      background-color: #053b70; /* NUOVO COLORE AL HOVER: più scuro come richiesto */
       box-shadow: 0 3px 6px rgba(0,0,0,0.3); /* Ombra leggermente più pronunciata al hover */
     }
 
@@ -159,7 +171,7 @@
         }
         .google-style-button {
             min-width: unset; /* Rimuovi min-width su mobile, si adatteranno meglio */
-            /* width: 100%; (già specificato sopra, e va bene così) */
+            /* width: 100%; (già specificato sopra per i pulsanti, e va bene così) */
         }
     }
   </style>
