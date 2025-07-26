@@ -12,7 +12,7 @@
     body {
       margin: 0;
       padding: 0;
-      min-height: 100vh; /* Assicura che il body sia almeno alto come la viewport */
+      min-height: auto; /* Assicura che il body sia almeno alto come la viewport */
       overflow-x: hidden; /* Previene scroll orizzontale */
       
       font-family: 'Quicksand', sans-serif;
@@ -122,4 +122,153 @@
       cursor: pointer;
       text-decoration: none;
       text-align: center;
-      transition: background-color 0.3s ease, box-shadow 0
+      transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Stile per il wrapper del pulsante primario (per Billetto) */
+    .billetto-button-wrapper {
+      background-color: #06417c;
+      color: white;
+      border: none;
+      box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+    }
+    .billetto-button-wrapper:hover {
+      background-color: #053b70; /* COLORE HOVER SPECIFICO */
+      box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+    }
+
+    /* Stile per il widget Billetto *all'interno* del wrapper */
+    .billetto-button-wrapper billetto-widget {
+        width: 100% !important;
+        height: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+    .billetto-button-wrapper billetto-widget button {
+      background-color: transparent !important;
+      color: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      font-size: 1em !important;
+    }
+
+    /* Stile per il pulsante secondario (WhatsApp) */
+    .whatsapp-button {
+      background-color: transparent;
+      color: #3c4043;
+      border: 1px solid #06417c;
+      box-shadow: none;
+    }
+    .whatsapp-button:hover {
+      background-color: rgba(60,64,67,0.04);
+      border-color: #c5c8cb;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+
+    /* Media Queries per schermi più piccoli */
+    @media (max-width: 600px) {
+        .content-centered-container {
+            padding: 20px 15px; /* Meno padding sui lati per mobile */
+        }
+        .google-style-button {
+            min-width: unset; /* Rimuovi min-width su mobile, si adatteranno meglio */
+        }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="parallax-bg-image"></div>
+
+  <div class="main-content-wrapper">
+
+    <div class="content-centered-container">
+
+      <img src="https://marcovecchione.github.io/assorc/disney800350.png" alt="Musica Sotto le Stelle" class="header-image">
+      
+      <div class="content-section">
+        <p>
+          L'Associazione Orchestriamo presenta, con il patrocinio del Comune di Lauro e in collaborazione con il Demurgo, Eterea danze storiche e Pro Lauro, "Musica sotto le stelle", un concerto al buio della Lauro Symphony Orchestra, che si terrà domenica 21 agosto alle ore 21:00 al Castello Lancellotti di Lauro (AV).
+        </p>
+        <p>
+          È necessaria la prenotazione.
+        </p>
+        <p>
+          A differenza degli altri anni, questa volta è <strong style="color: #1a73e8;">possibile prenotare solamente online</strong>; contattando lo staff via WhatsApp sarà possibile, ove necessario, ricevere assistenza per la prenotazione.
+        </p>
+        <p class="note">
+          <strong>ATTENZIONE:</strong> I biglietti non sono riservati fino alla conclusione del pagamento.
+        </p>
+      </div>
+
+      <div class="button-container">
+        <div class="billetto-button-wrapper google-style-button">
+          <script src="https://billetto.it/widget.js"></script>
+          <billetto-widget 
+            type="button" 
+            event="1481892" 
+            organization="billetto.it" 
+            lang="it" 
+            theme="light" 
+            color="#06417c" 
+            button-style="rounded"
+          ></billetto-widget>
+        </div>
+
+        <a href="https://wa.me/+390810099929" class="whatsapp-button google-style-button" target="_blank" rel="noopener noreferrer">
+          Contattaci se hai bisogno di aiuto per prenotare
+        </a>
+      </div>
+
+    </div> </div> <script>
+    window.addEventListener('scroll', function() {
+      const parallaxBg = document.querySelector('.parallax-bg-image');
+      const mainContent = document.querySelector('.main-content-wrapper');
+      
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      // Calcola il fattore di parallasse (es. 0.3 per un 30% della velocità di scroll)
+      // L'immagine si muove verso l'alto più lentamente
+      parallaxBg.style.transform = 'translateY(' + (-scrollTop * 0.3) + 'px)';
+
+      // LOGICA PER NON MOSTRARE L'IMMAGINE SOTTO IL CONTENUTO ALLA FINE
+      // Calcola la posizione del fondo del contenuto principale rispetto all'inizio della pagina
+      const mainContentBottom = mainContent.offsetTop + mainContent.offsetHeight;
+      const viewportHeight = window.innerHeight;
+
+      // Se il fondo del contenuto è sopra o nel mezzo della viewport
+      if (mainContentBottom < (scrollTop + viewportHeight)) {
+          // L'altezza dell'immagine di sfondo si adatta per "finire" con il contenuto
+          // Se la parte inferiore del mainContent è entrata nella viewport
+          // Allora l'altezza dell'immagine di sfondo si riduce per non andare sotto
+          let newBgHeight = mainContentBottom - (-scrollTop * 0.3); // Calcolo approssimato per la chiusura
+          
+          // Se la nuova altezza calcolata è minore dell'altezza della viewport, usiamo quella
+          // Altrimenti, usiamo l'altezza della viewport per non farla scomparire troppo presto
+          if (newBgHeight > 0 && newBgHeight < viewportHeight) {
+              parallaxBg.style.height = newBgHeight + 'px';
+          } else if (newBgHeight <= 0) {
+              parallaxBg.style.height = '0px'; // La fa scomparire se il contenuto l'ha completamente coperta
+          } else {
+              parallaxBg.style.height = viewportHeight + 'px'; // Mantiene l'altezza completa se il contenuto non l'ha ancora coperta
+          }
+      } else {
+          // Se il contenuto è ancora completamente sotto o appena visibile, l'immagine rimane a 100vh
+          parallaxBg.style.height = viewportHeight + 'px';
+      }
+    });
+
+    // Esegui la funzione all'inizio per impostare la posizione iniziale correttamente
+    window.dispatchEvent(new Event('scroll'));
+  </script>
+
+</body>
+</html>
