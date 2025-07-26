@@ -1,62 +1,51 @@
-<div id="billetto-custom-button-container">
-  <billetto-widget
-    type="button"
-    event="1481892"
-    organization="billetto.it"
-    lang="it"
-    theme="light"
-    color="#06417c"
-    button-style="rounded"
-    style="font-family: 'Quicksand', sans-serif;" /* Tentativo inline per il font */
-  ></billetto-widget>
-</div>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Prenotazione Evento</title>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const billettoButton = document.querySelector('#billetto-custom-button-container button');
-    if (billettoButton) {
-      billettoButton.style.setProperty('width', '250px', 'important'); /* <--- SOSTITUISCI QUESTO VALORE */
-      billettoButton.style.setProperty('padding', '15px 30px', 'important');
-      billettoButton.style.setProperty('font-size', '1.2em', 'important');
-      billettoButton.style.setProperty('font-family', 'Quicksand, sans-serif', 'important');
-      billettoButton.style.setProperty('box-sizing', 'border-box', 'important');
-      billettoButton.style.setProperty('border-radius', '8px', 'important');
-      // Per debug: billettoButton.style.setProperty('background-color', 'green', 'important');
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    .billetto-widget button {
+      font-family: 'Quicksand', sans-serif !important;
+      padding: 15px 30px !important;
+      font-size: 1.2em !important;
+      width: 250px !important;
+      height: auto !important;
+      box-sizing: border-box !important;
+      border-radius: 8px !important;
     }
 
-    // Prova a forzare gli stili per l'overlay se non funzionano dal CSS
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.addedNodes) {
-          mutation.addedNodes.forEach((node) => {
-            if (node.nodeType === 1 && (node.classList.contains('billetto-modal-overlay') || node.classList.contains('billetto-modal-container') || node.classList.contains('billetto-modal') || node.classList.contains('billetto-modal-wrapper'))) {
-              node.style.setProperty('width', '100vw', 'important');
-              node.style.setProperty('height', '100vh', 'important');
-              node.style.setProperty('max-width', 'none', 'important');
-              node.style.setProperty('max-height', 'none', 'important');
-              node.style.setProperty('position', 'fixed', 'important');
-              node.style.setProperty('top', '0', 'important');
-              node.style.setProperty('left', '0', 'important');
-              node.style.setProperty('z-index', '99999', 'important');
-              node.style.setProperty('display', 'flex', 'important'); // Assicura che sia flex per centrare
-              node.style.setProperty('justify-content', 'center', 'important');
-              node.style.setProperty('align-items', 'center', 'important');
+    .billetto-modal-overlay,
+    .billetto-modal-container,
+    .billetto-modal {
+      width: 100vw !important;
+      height: 100vh !important;
+      max-width: none !important;
+      max-height: none !important;
+      background-color: rgba(0, 0, 0, 0.7) !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      z-index: 99999 !important;
+      overflow: auto !important;
+    }
 
-              // Trova l'iframe all'interno e stile anche quello
-              const iframe = node.querySelector('iframe');
-              if (iframe) {
-                iframe.style.setProperty('width', '90%', 'important');
-                iframe.style.setProperty('height', '90%', 'important');
-                iframe.style.setProperty('border', 'none', 'important');
-              }
-              observer.disconnect(); // Una volta trovati e stilizzati, non c'è bisogno di osservare ancora
-            }
-          });
-        }
-      });
-    });
-
-    // Avvia l'osservazione sul body per i cambiamenti del DOM
-    observer.observe(document.body, { childList: true, subtree: true });
-  });
-</script>
+    .billetto-modal-content iframe,
+    .billetto-modal-dialog iframe,
+    iframe[src*="billetto.it/e/"] {
+      width: 90% !important;
+      height: 90% !important;
+      border: none !important;
+    }
+  </style>
+</head>
+<body>
+  <script src="https://billetto.it/widget.js"></script>
+  <billetto-widget type="button" event="1481892" organization="billetto.it" lang="it" theme="light" color="#06417c" button-style="rounded"></billetto-widget>
+</body>
+</html>
